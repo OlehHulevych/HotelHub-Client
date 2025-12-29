@@ -1,0 +1,50 @@
+﻿.burger_menu{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    top: 0;
+    right: 0;
+    width: 50%;
+    min-height: 100vh;
+    background-color: #7C6A46;
+}
+
+.navbar{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    gap: 1rem;
+    font-size: 24px;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+}
+.login_button{
+    outline: none;
+    border:none;
+    cursor:pointer;
+    background-color: #c3a460;
+    color: white;
+    height: 55px;
+    padding-right: 30px;
+    padding-left: 30px;
+    transition: all .3s ease-in-out;
+    border-radius: 10px;
+}
+.login_button:hover{
+    background-color: #5c5136;
+}
+.navlink{
+    width: 100%;
+    border-bottom: 1px white solid;
+}
+
+
+@media screen and (max-width:450px){
+    .navbar{
+        font-size: 18px;
+    }
+}
+

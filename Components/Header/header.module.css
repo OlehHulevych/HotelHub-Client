@@ -1,0 +1,85 @@
+﻿.header{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-family: Roboto sans-serif;
+    justify-content: space-between;
+
+}
+
+
+.navbar{
+    display: flex;
+    gap: 1rem;
+}
+
+.login_button{
+    outline: none;
+    border:none;
+    cursor:pointer;
+    background-color: #7C6A46;
+    color: white;
+    height: 55px;
+    padding-right: 30px;
+    padding-left: 30px;
+    transition: all .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.login_button:hover{
+    background-color: #5c5136;
+}
+
+.navlink{
+    cursor: pointer;
+}
+.active{
+    color: #7C6A46;
+    font-weight: 600;
+}
+.button_block{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.burgger_menu{
+    width: 40px;
+    display: none;
+}
+.burgger_menu_item{
+    border: 3px solid #7C6A46 ;
+    border-radius: 10px;
+    margin-bottom:10px ;
+}
+
+
+@media screen and (max-width: 645px) {
+    .login_button{
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .logo{
+        width: 20%;
+    }
+    .navbar{
+        display: none;
+    }
+    .burgger_menu{
+        display: block;
+    }
+    .login_button{
+        display: none;
+    }
+}
+@media screen and (max-width: 450px){
+    .logo{
+        width: 30%;
+    }
+}
+
+
+
