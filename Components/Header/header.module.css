@@ -8,6 +8,10 @@
 
 }
 
+.logo{
+    max-width: 128px;
+}
+
 
 .navbar{
     display: flex;
