@@ -4,7 +4,9 @@ import type {Dispatch, SetStateAction} from "react";
 
 
 
+
 const BurrgerMenu = ({isOpen,setIsOpen}:{isOpen:boolean, setIsOpen:Dispatch<SetStateAction<boolean>>}) => {
+
     return (
         <div className={`${style.burger_menu} ${isOpen?style.active:''}`}>
                 <RxCross1 className={style.cross} onClick={()=>setIsOpen(false)}/>
