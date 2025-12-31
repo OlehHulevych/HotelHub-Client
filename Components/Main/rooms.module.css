@@ -1,0 +1,136 @@
+﻿/* LuxuriousRooms.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+
+.section {
+    position: relative;
+    /* Use a nice resort background image here */
+    background-image: url('../../public/Main/welcome_rooms.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 5rem 2rem;
+    font-family: sans-serif;
+    color: #fff;
+}
+
+/* Dark overlay to match the reference image's tinted look */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(60, 50, 30, 0.75); /* Dark brown tint */
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2; /* Ensures content sits above the overlay */
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.separator {
+    width: 100px;
+    height: 2px;
+    background-color: #fff;
+    margin: 1rem 0;
+}
+
+.subheading {
+    font-size: 1rem;
+    margin-bottom: 3.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Card Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: #333; /* Reset text color for white card */
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.roomImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .roomImage {
+    transform: scale(1.05);
+}
+
+.badge {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: #8B7355; /* The theme brown color */
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #4a4a4a;
+    text-align: left;
+    padding: 0 0.5rem 1rem 0.5rem;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .heading {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

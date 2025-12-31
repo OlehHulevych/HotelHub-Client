@@ -1,0 +1,92 @@
+﻿/* Facilities.module.css */
+
+/* Re-import fonts to ensure standalone functionality */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+
+.section {
+    background-color: #fff;
+    padding: 5rem 2rem;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+.subheading {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: #FAFAFA; /* Light off-white background */
+    padding: 3.5rem 2rem;
+    border-radius: 4px; /* Slight rounding like the image */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.iconWrapper {
+    color: #8B7355; /* The gold/brown theme color */
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Specific size for icons */
+.icon {
+    width: 48px;
+    height: 48px;
+}
+
+.label {
+    color: #8B7355;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Responsiveness */
+
+/* Tablet: 2 columns */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+}

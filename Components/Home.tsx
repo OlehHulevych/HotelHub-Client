@@ -1,13 +1,16 @@
 ﻿import Header from "./Header/Header.tsx";
-import type {ReactNode} from "react";
+import Footer from "./Footer/Footer.tsx";
 import {TabLayout} from "../context/TabContext.tsx";
+import Main from "./Main/Main.tsx";
 
 
-const Home = ({children}:{children:ReactNode}) => {
+
+const Home = () => {
     return (
         <TabLayout>
             <Header/>
-            {children}
+            <Main/>
+            <Footer/>
         </TabLayout>
     );
 };

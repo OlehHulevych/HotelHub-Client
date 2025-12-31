@@ -1,0 +1,157 @@
+﻿/* Footer.module.css */
+
+/* Import the script font for the brand name */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.footer {
+    background-color: #7A6B53; /* Matching the earthy olive/brown tone */
+    color: #fff;
+    padding: 5rem 2rem 2rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clean sans-serif */
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.topSection {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr; /* Layout based on content density */
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* Column 1: Brand & Description */
+.brandName {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    font-weight: 400;
+}
+
+.brandText {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 350px;
+}
+
+/* Columns 2-4: Links */
+.columnTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.linkList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Column 5: Newsletter */
+.newsletterText {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.inputGroup {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.input {
+    flex: 1;
+    border: none;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    color: #333;
+    outline: none;
+    background: transparent;
+}
+
+.subscribeBtn {
+    background-color: #7A6B53; /* Match footer bg for button */
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.subscribeBtn:hover {
+    background-color: #635642;
+}
+
+/* Bottom Bar */
+.bottomBar {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .topSection {
+        grid-template-columns: 1fr 1fr 1fr; /* Stack into 3 columns */
+        gap: 3rem;
+    }
+
+    .brandColumn {
+        grid-column: span 3; /* Brand takes full width on top */
+    }
+
+    .newsletterColumn {
+        grid-column: span 3; /* Newsletter takes full width at bottom */
+    }
+}
+
+@media (max-width: 768px) {
+    .topSection {
+        grid-template-columns: 1fr; /* Single column stack */
+        text-align: center;
+        gap: 2.5rem;
+    }
+
+    .brandColumn, .newsletterColumn {
+        grid-column: auto;
+    }
+
+    .brandText {
+        margin: 0 auto;
+    }
+
+    .inputGroup {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
