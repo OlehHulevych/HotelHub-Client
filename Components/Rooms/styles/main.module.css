@@ -1,0 +1,106 @@
+﻿/* RoomsAndSuites.module.css */
+
+/* Import the serif font for the title */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+.section {
+    position: relative;
+    /* Use a high-quality image of a luxury bedroom */
+    background-image: url('../../../public/Rooms/background.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 600px; /* Set a good height for a hero section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 2rem;
+    font-family: sans-serif;
+}
+
+/* Dark overlay to ensure text readability */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 50% opacity black */
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2; /* Place content above the overlay */
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+    width: 40px;
+    height: 70px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.scrollIndicator:hover {
+    border-color: #fff;
+}
+
+.arrowIcon {
+    animation: bounce 2s infinite;
+}
+
+/* Simple bounce animation for the arrow */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(10px);
+    }
+    60% {
+        transform: translateY(5px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section {
+        min-height: 500px;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+}
