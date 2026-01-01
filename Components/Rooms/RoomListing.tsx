@@ -1,51 +1,75 @@
-﻿import { Tv, ShowerHead, Wifi } from 'lucide-react'; // Make sure to npm install lucide-react
+﻿import { Tv, ShowerHead, Wifi } from 'lucide-react';
 import styles from './styles/rooms.module.css';
+import type {RoomType} from "../../types.ts";
+import axios from 'axios';
 import {useState, useEffect} from "react";
 
 
+
 const RoomListing = () => {
-    const [rooms,setRooms] = useState<Array<>>([]);
+    const [rooms,setRooms] = useState<RoomType[]>([]);
+
+    useEffect(()=>{
+
+            const fetchRooms = async() => {
+                try{
+                    const response = await axios.get("https://hotelhub-b4gjgjhtf4esfvgh.polandcentral-01.azurewebsites.net/api/RoomType")
+                    if (response.status==200){
+                        const data = response.data.items;
+                        console.log(data);
+                        setRooms(data);
+                    }
+                }
+                catch (error){
+                    console.error("There are error: "+error);
+                }
+
+            }
+
+        fetchRooms();
+
+    },[])
     return (
         <section className={styles.section}>
             <div className={styles.grid}>
-                {/*{rooms.map((room) => (*/}
-                {/*    <div key={room.id} className={styles.card}>*/}
-                {/*        /!* Image Area *!/*/}
-                {/*        <div className={styles.imageWrapper}>*/}
-                {/*            <img*/}
-                {/*                src={room.image}*/}
-                {/*                alt={room.title}*/}
-                {/*                className={styles.image}*/}
-                {/*            />*/}
-                {/*        </div>*/}
+                {rooms.map((room) => (
+                    <div key={room.id} className={styles.card}>
+                        {/* Image Area */}
+                        <div className={styles.imageWrapper}>
+                            <img
+                                src={room.photos[0].uri}
+                                alt={room.name}
+                                className={styles.image}
+                            />
+                        </div>
 
-                {/*        /!* Content Area *!/*/}
-                {/*        <div className={styles.details}>*/}
-                {/*            <h3 className={styles.title}>{room.title}</h3>*/}
-                {/*            <div className={styles.price}>*/}
-                {/*                <span className={styles.currency}>₦</span>{room.price}*/}
-                {/*            </div>*/}
+                        {/* Content Area */}
+                        <div className={styles.details}>
+                            <h3 className={styles.title}>{room.name}</h3>
+                            <div className={styles.price}>
+                                <span className={styles.currency}>$</span>{room.pricePerNight}
+                            </div>
 
-                {/*            <div className={styles.cardFooter}>*/}
-                {/*                <div className={styles.amenities}>*/}
-                {/*                    <div className={styles.iconCircle}>*/}
-                {/*                        <Tv size={16} />*/}
-                {/*                    </div>*/}
-                {/*                    <div className={styles.iconCircle}>*/}
-                {/*                        <ShowerHead size={16} />*/}
-                {/*                    </div>*/}
-                {/*                    <div className={styles.iconCircle}>*/}
-                {/*                        <Wifi size={16} />*/}
-                {/*                    </div>*/}
-                {/*                </div>*/}
+                            <div className={styles.cardFooter}>
+                                <div className={styles.amenities}>
+                                    <div className={styles.iconCircle}>
+                                        <Tv size={16} />
+                                    </div>
+                                    <div className={styles.iconCircle}>
+                                        <ShowerHead size={16} />
+                                    </div>
+                                    <div className={styles.iconCircle}>
+                                        <Wifi size={16} />
+                                    </div>
+                                </div>
 
-                {/*                <button className={styles.bookBtn}>*/}
-                {/*                    Book now*/}
-                {/*                </button>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*))}*/}
+                                <button className={styles.bookBtn}>
+                                    Book now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </section>
     );
