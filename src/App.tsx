@@ -10,6 +10,7 @@ function App() {
            <Route path="/" element={<Home />}/>
            <Route path = "/about" element={<About/>}/>
            <Route path= "/authorize" element={<Authorization/>}/>
+           <Route path= "/authorize" element={<Authorization/>}/>
        </Routes>
     );
 }

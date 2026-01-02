@@ -7,7 +7,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "esModuleInterop": true
   },
   "rules":{
     "no-unused-vars":"warn"
