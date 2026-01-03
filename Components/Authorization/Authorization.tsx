@@ -2,6 +2,7 @@
 import Registration from "./Registration";
 import Login from "./Login";
 import {useEffect, useState} from "react";
+import {AuthLayout} from "../../context/AuthContext.tsx";
 
 
 const Authorization = () => {
@@ -17,12 +18,16 @@ const Authorization = () => {
     },[searchParams])
     if(type==="registration"){
         return (
-            <Registration/>
+            <AuthLayout>
+                 <Registration/>
+            </AuthLayout>
         )
     }
     else{
         return (
-            <Login/>
+            <AuthLayout>
+                <Login/>
+            </AuthLayout>
         )
     }
 };

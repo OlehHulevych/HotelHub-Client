@@ -16,3 +16,5 @@ export interface RoomPhoto {
     public_id:string
     uri:string,
 }
+
+

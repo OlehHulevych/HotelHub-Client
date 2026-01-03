@@ -3,17 +3,20 @@ import Footer from "./Footer/Footer.tsx";
 import {TabLayout} from "../context/TabContext.tsx";
 import Main from "./Main/Main.tsx";
 import RoomsPage from "./Rooms/Rooms.tsx";
+import {AuthLayout} from "../context/AuthContext.tsx";
 
 
 
 const Home = () => {
     return (
-        <TabLayout>
-            <Header/>
-            <Main/>
-            <RoomsPage/>
-            <Footer/>
-        </TabLayout>
+        <AuthLayout>
+            <TabLayout>
+                <Header/>
+                <Main/>
+                <RoomsPage/>
+                <Footer/>
+            </TabLayout>
+        </AuthLayout>
     );
 };
 
