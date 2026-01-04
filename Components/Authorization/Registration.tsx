@@ -78,7 +78,6 @@ const Registration = () => {
 
     return (
         <div className={styles.container}>
-            {/* Left Panel (Unchanged) */}
             <div className={styles.leftPanel}>
                 <div className={styles.logoContainer}>
                     <img  className={styles.pvLogo} src="../../public/big_logo.jpg" alt=""/>
@@ -110,7 +109,8 @@ const Registration = () => {
                                 )}
                             </label>
                         </div>
-                        {/* --------------------------------- */}
+
+
                         <div className={styles.error}>
                             {error!=null? error : ""}
                         </div>

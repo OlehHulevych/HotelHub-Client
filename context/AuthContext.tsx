@@ -119,7 +119,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
         }
 
         checkIfAuthorizeHandler();
-    },[user])
+    },[])
 
     return(
         <AuthContext.Provider value={{ isLogged, user, registration,login, logout }}>

@@ -1,13 +1,14 @@
-﻿import React, {useState, useEffect, type ChangeEvent} from 'react';
+﻿import React, {useState, type ChangeEvent} from 'react';
 // Added 'Camera' to imports
 import { Mail, Lock, Check } from 'lucide-react';
 
 import styles from './auth.module.css';
 import {Link} from "react-router";
+import {useAuth} from "../../context/AuthContext.tsx";
 
 
 // Reusable Input Field Component (Unchanged)
-const InputField = ({ label, type, icon, value, onChange, isValid }:{label:string, type:string, icon:React.ReactNode, value:string, onChange:React.ChangeEventHandler<HTMLElement>, isValid?:boolean }) => (
+const InputField = ({ label, type, name, icon, value, onChange, isValid }:{label:string, type:string, name:string, icon:React.ReactNode, value:string, onChange:React.ChangeEventHandler<HTMLElement>, isValid?:boolean }) => (
     <div className={styles.inputGroup}>
         <label className={styles.label}>
             {icon}
@@ -15,6 +16,7 @@ const InputField = ({ label, type, icon, value, onChange, isValid }:{label:strin
         </label>
         <div className={styles.inputWrapper}>
             <input
+                name={name}
                 type={type}
                 value={value}
                 onChange={onChange}
@@ -33,12 +35,18 @@ const Login = () => {
 
     });
 
-    // New state for avatar
+    const {login} = useAuth()
+    const [error, setError] = useState<string|null>(null);
 
+    const formHandler = async (e:ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget)
 
-
-
-    // New handler for file input
+        const result = await login(formData);
+        if(typeof result == 'string'){
+            setError(result);
+        }
+    }
 
 
     return (
@@ -55,12 +63,14 @@ const Login = () => {
             {/* Right Panel - Form */}
             <div className={styles.rightPanel}>
                 <div className={styles.formContainer}>
-                    <form>
-
-
+                    <form onSubmit={formHandler} method="post" encType="multipart/form-data">
+                        <div className={styles.error}>
+                            {error!=null? error : ""}
+                        </div>
                         <InputField
                             label="Email"
                             type="email"
+                            name="email"
                             icon={<Mail size={16} className={styles.labelIcon} />}
                             value={formData.email}
                             onChange={(e:ChangeEvent<HTMLInputElement>)=>setFormData({
@@ -72,6 +82,7 @@ const Login = () => {
                         <InputField
                             label="Password"
                             type="password"
+                            name="password"
                             icon={<Lock size={16} className={styles.labelIcon} />}
                             value={formData.password}
                             onChange={(e:ChangeEvent<HTMLInputElement>)=>setFormData({
