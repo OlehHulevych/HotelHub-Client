@@ -8,12 +8,13 @@ import {useState, useEffect} from "react";
 
 const RoomListing = () => {
     const [rooms,setRooms] = useState<RoomType[]>([]);
+    const api_url = import.meta.env.VITE_API_URL
 
     useEffect(()=>{
 
             const fetchRooms = async() => {
                 try{
-                    const response = await axios.get("https://hotelhub-b4gjgjhtf4esfvgh.polandcentral-01.azurewebsites.net/api/RoomType")
+                    const response = await axios.get(api_url + "/RoomType")
                     if (response.status==200){
                         const data = response.data.items;
                         console.log(data);

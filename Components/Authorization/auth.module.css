@@ -222,6 +222,13 @@
     height: 100%;
     object-fit: cover;
 }
+.error{
+    color: red;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    font-family: "Roboto", serif;
+    transition: all .3s ease-in-out;
+}
 
 /* Responsive Design */
 @media (max-width: 900px) {

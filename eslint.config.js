@@ -32,11 +32,19 @@ export default tseslint.config(
           { allowConstantExport: true },
         ],
 
-        // --- THE FIX ---
-        // 1. Disable the base JS rule (crucial!)
-        "no-unused-vars": "off",
-        // 2. Disable the TS rule (as you wanted)
-        "@typescript-eslint/no-unused-vars": "off"
+
+
+          "no-unused-vars": "off",
+
+          // Configure the TypeScript rule
+          "@typescript-eslint/no-unused-vars": [
+              "warn", // or "error"
+              {
+                  "argsIgnorePattern": "^_",
+                  "varsIgnorePattern": "^_",
+                  "caughtErrorsIgnorePattern": "^_"
+              }
+          ]
       },
     },
 )

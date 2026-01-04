@@ -19,7 +19,7 @@ interface User {
 
 interface contextPropsType  {
     isLogged:boolean,
-    user:User,
+    user:User|null,
     registration:(FormData:FormData)=>Promise<void>|string
     login:(FormData:FormData)=>Promise<void>|string;
     logout:()=>void;
@@ -30,6 +30,7 @@ const AuthContext = createContext<contextPropsType|undefined>(undefined);
 
 
 export const AuthLayout = ({children}:{children:ReactNode}) => {
+    const api_url = import.meta.env.VITE_API_URL
     const navigate = useNavigate();
     const [isLogged, setIsLogged] = useState(false);
     const [user, setUser] = useState<User|null>(null);
@@ -41,7 +42,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
         }
         formData.delete("confirmPassword");
         try{
-            const response = await axios.post("https://hotelhub-b4gjgjhtf4esfvgh.polandcentral-01.azurewebsites.net/api/user/register", formData ,{
+            const response = await axios.post(api_url+"/user/register", formData ,{
                 headers:{
                     "Content-Type":"multipart/form-data"
                 }
@@ -63,7 +64,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
     }
     const login = async (formData:FormData) => {
         try{
-            const response = await axios.post("https://hotelhub-b4gjgjhtf4esfvgh.polandcentral-01.azurewebsites.net/api/user/login", formData, {
+            const response = await axios.post(api_url+ "/user/login", formData, {
                 headers:{
                     "Content-Type":"multipart/form-data"
                 }
@@ -98,7 +99,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
             const token = Cookies.get("token");
             if(token!=null){
                 try{
-                    const response = await axios.get("https://hotelhub-b4gjgjhtf4esfvgh.polandcentral-01.azurewebsites.net/api/user/me",{
+                    const response = await axios.get(api_url+"/user/me",{
                         headers:{
                             Authorization:"Bearer "+token
                         }

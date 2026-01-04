@@ -6,7 +6,7 @@ import {AuthLayout} from "../../context/AuthContext.tsx";
 
 
 const Authorization = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const [type,setType] = useState<string|null>("login");
     useEffect(()=>{
         const getType = () => {

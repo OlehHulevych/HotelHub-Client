@@ -1,13 +1,13 @@
 ﻿import React, {useState, useEffect, type ChangeEvent} from 'react';
-// Added 'Camera' to imports
+
 import { User, Mail, Lock, Check, Camera } from 'lucide-react';
 
 import styles from './auth.module.css';
 import {Link} from "react-router";
+import {useAuth} from "../../context/AuthContext.tsx";
 
 
-// Reusable Input Field Component (Unchanged)
-const InputField = ({ label, type, icon, value, onChange, isValid }:{label:string, type:string, icon:React.ReactNode, value:string, onChange:React.ChangeEventHandler<HTMLElement>, isValid?:boolean }) => (
+const InputField = ({ label, name, type, icon, value, onChange, isValid }:{label:string, name:string, type:string, icon:React.ReactNode, value:string, onChange:React.ChangeEventHandler<HTMLElement>, isValid?:boolean }) => (
     <div className={styles.inputGroup}>
         <label className={styles.label}>
             {icon}
@@ -16,6 +16,7 @@ const InputField = ({ label, type, icon, value, onChange, isValid }:{label:strin
         <div className={styles.inputWrapper}>
             <input
                 type={type}
+                name = {name}
                 value={value}
                 onChange={onChange}
                 className={styles.input}
@@ -60,6 +61,20 @@ const Registration = () => {
             }
         };
     }, [avatarPreview]);
+    const {registration} = useAuth();
+    const [error, setError] = useState<string|null>(null)
+
+    const formHandler = async (e:ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget)
+        if (avatarFile!=null) {
+            formData.append("photo", avatarFile);
+        }
+        const result = await registration(formData);
+        if(typeof result == 'string'){
+            setError(result);
+        }
+    }
 
     return (
         <div className={styles.container}>
@@ -75,8 +90,7 @@ const Registration = () => {
             {/* Right Panel - Form */}
             <div className={styles.rightPanel}>
                 <div className={styles.formContainer}>
-                    <form>
-                        {/* --- New Avatar Upload Section --- */}
+                    <form onSubmit={formHandler} method="post" encType="multipart/form-data">
                         <div className={styles.avatarUploadContainer}>
                             <input
                                 type="file"
@@ -97,9 +111,12 @@ const Registration = () => {
                             </label>
                         </div>
                         {/* --------------------------------- */}
-
+                        <div className={styles.error}>
+                            {error!=null? error : ""}
+                        </div>
                         <InputField
                             label="Name"
+                            name="name"
                             type="text"
                             icon={<User size={16} className={styles.labelIcon} />}
                             value={formData.name}
@@ -110,6 +127,7 @@ const Registration = () => {
                         />
                         <InputField
                             label="Email"
+                            name = "email"
                             type="email"
                             icon={<Mail size={16} className={styles.labelIcon} />}
                             value={formData.email}
@@ -121,6 +139,7 @@ const Registration = () => {
                         />
                         <InputField
                             label="Password"
+                            name="password"
                             type="password"
                             icon={<Lock size={16} className={styles.labelIcon} />}
                             value={formData.password}
@@ -131,7 +150,8 @@ const Registration = () => {
                         />
                         <InputField
                             label="Confirm Password"
-                            type="confirmPassword"
+                            name="confirmPassword"
+                            type="password"
                             icon={<Lock size={16} className={styles.labelIcon} />}
                             value={formData.confirmPassword}
                             onChange={(e:ChangeEvent<HTMLInputElement>)=>setFormData({
