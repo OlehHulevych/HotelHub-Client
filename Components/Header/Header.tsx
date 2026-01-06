@@ -2,10 +2,13 @@
 import BurrgerMenu from "./BurrgerMenu.tsx";
 import { useState} from "react";
 import {useTab} from "../../context/TabContext.tsx";
+import {useAuth} from "../../context/AuthContext.tsx";
+import {Link} from "react-router";
 
 const Header = () => {
     const [isOpen,setIsOpen] = useState(false);
     const {currentTab, setCurrentTab} = useTab();
+    const {user} = useAuth();
 
     return (
             <header className={style.header}>
@@ -18,7 +21,11 @@ const Header = () => {
                         <div onClick={()=>setCurrentTab("Contact")} className={`${style.navlink} ${currentTab==="Contact"? style.active:""}`}>Contact</div>
                 </nav>
                 <div className={style.button_block}>
-                    <button className={style.login_button}>Log in</button>
+                    {user!=null?(
+                        <img className={style.avatar} src={user.avatarUser.avatarPath} alt=""/>
+                    ):(<button className={style.login_button}><Link to="/authorize?type=login">Log in</Link></button>)}
+
+
                     <div onClick={()=>setIsOpen(true)} className={style.burgger_menu}>
                         <div className={style.burgger_menu_item}></div>
                         <div className={style.burgger_menu_item}></div>

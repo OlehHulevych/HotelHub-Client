@@ -3,18 +3,24 @@
     name:string,
     description:string,
     pricePerNight:number,
-    norishment:string[],
-    view:string[]
-    shower:string[]
+    detail:Detail,
     photos:RoomPhoto[]
-
-
 }
 
 export interface RoomPhoto {
     id:string;
     public_id:string
     uri:string,
+}
+
+export interface Detail {
+    id:string,
+    norishment:string[],
+    spa:string[],
+    view:string[]
+    capacity:number,
+    roomTypeId:string
+
 }
 
 

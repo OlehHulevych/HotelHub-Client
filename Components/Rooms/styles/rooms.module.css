@@ -61,6 +61,11 @@
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
+    cursor:pointer
+}
+
+.title:hover{
+    text-decoration: underline;
 }
 
 .price {
@@ -117,6 +122,68 @@
 
 .bookBtn:hover {
     background-color: #635642;
+}
+
+/* RoomDetails.module.css - Additions for Slider */
+
+.imageContainer {
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    position: relative; /* Needed for absolute positioning of arrows and counter */
+}
+
+.roomImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Slider Navigation Arrows */
+.sliderArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.sliderArrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.sliderArrowLeft {
+    left: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.sliderArrowRight {
+    right: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+/* Photo Counter */
+.photoCounter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 /* Responsive */

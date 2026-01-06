@@ -57,6 +57,12 @@
     margin-bottom:10px ;
 }
 
+.avatar{
+    width: 60px;
+    border: 1px solid rgba(99, 95, 95, 0.55);
+    border-radius: 50%;
+}
+
 
 @media screen and (max-width: 645px) {
     .login_button{

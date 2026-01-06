@@ -9,10 +9,16 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import {useNavigate} from "react-router";
 
+interface AvatarType {
+    id:string,
+    userId:string,
+    public_id:string,
+    avatarPath:string
+}
 interface User {
     id:string,
     name:string,
-    avatarUser:object,
+    avatarUser:AvatarType,
     email:string,
     reservations:never[]
 }
@@ -97,6 +103,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
     useEffect(()=>{
         const checkIfAuthorizeHandler = async():Promise<void> =>{
             const token = Cookies.get("token");
+            console.log(token)
             if(token!=null){
                 try{
                     const response = await axios.get(api_url+"/user/me",{
@@ -107,6 +114,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
                     if(response.status==200){
                         const data = response.data;
                         setUser(data.user);
+                        console.log(user)
                         setIsLogged(true)
                     }
                 }

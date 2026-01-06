@@ -3,12 +3,25 @@ import styles from './styles/rooms.module.css';
 import type {RoomType} from "../../types.ts";
 import axios from 'axios';
 import {useState, useEffect} from "react";
+import RoomDetails from "./RoomDetails.tsx";
 
 
 
 const RoomListing = () => {
     const [rooms,setRooms] = useState<RoomType[]>([]);
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [id,setId] = useState<string>();
     const api_url = import.meta.env.VITE_API_URL
+
+    const openDetails  =(id:string):void => {
+        setIsOpen(true)
+        setId(id);
+    }
+
+    const onClose = ()=>{
+        setIsOpen(false)
+        setId("")
+    }
 
     useEffect(()=>{
 
@@ -46,7 +59,7 @@ const RoomListing = () => {
 
                         {/* Content Area */}
                         <div className={styles.details}>
-                            <h3 className={styles.title}>{room.name}</h3>
+                            <h3 onClick={()=>openDetails(room.id)} className={styles.title}>{room.name}</h3>
                             <div className={styles.price}>
                                 <span className={styles.currency}>$</span>{room.pricePerNight}
                             </div>
@@ -71,6 +84,8 @@ const RoomListing = () => {
                         </div>
                     </div>
                 ))}
+
+                {isOpen? <RoomDetails onClose = {onClose} id={id}/> : ""}
             </div>
         </section>
     );
