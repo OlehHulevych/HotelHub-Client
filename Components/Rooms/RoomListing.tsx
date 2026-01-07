@@ -86,6 +86,7 @@ const RoomListing = () => {
                 ))}
 
                 {isOpen? <RoomDetails onClose = {onClose} id={id}/> : ""}
+
             </div>
         </section>
     );

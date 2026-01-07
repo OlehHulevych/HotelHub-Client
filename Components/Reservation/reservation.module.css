@@ -1,0 +1,216 @@
+﻿/* Reservation.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
+.section {
+    padding: 4rem 2rem;
+    background-color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+.container {
+    max-width: 1000px; /* Slightly narrower to match the focused look */
+    margin: 0 auto;
+}
+
+.pageTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.contentWrapper {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+/* --- Left Column: Selected Room Card --- */
+.leftColumn {
+    flex: 1;
+    max-width: 400px;
+}
+
+.columnLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.roomCard {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.imageWrapper {
+    height: 220px;
+    width: 100%;
+}
+
+.roomImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.roomDetails {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.roomTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #8B7355;
+    margin-bottom: 0.5rem;
+}
+
+.roomPrice {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.amenitiesRow {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    background-color: #fafafa;
+}
+
+.amenityIcon {
+    color: #9ca3af;
+}
+
+/* --- Right Column: Booking Form --- */
+.rightColumn {
+    flex: 1.2;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid #f0f0f0;
+}
+
+.dateGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dateInput {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #555;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.dateInput:focus {
+    border-color: #8B7355;
+}
+
+.calendarIcon {
+    position: absolute;
+    right: 10px;
+    pointer-events: none; /* Let clicks pass through to input */
+    color: #888;
+}
+
+/* Pricing Section */
+.priceSummary {
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.priceRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.totalLabel {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.totalValue {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.subText {
+    font-size: 0.85rem;
+    color: #777;
+    font-style: italic;
+}
+
+.bookButton {
+    width: 100%;
+    background-color: #8B7355; /* The gold/brown theme */
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.bookButton:hover {
+    background-color: #705d44;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contentWrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .leftColumn, .rightColumn {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .dateGrid {
+        grid-template-columns: 1fr;
+    }
+}

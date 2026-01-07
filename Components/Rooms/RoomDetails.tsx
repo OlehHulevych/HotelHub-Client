@@ -6,17 +6,20 @@ import {
 import styles from './styles/RoomDetails.module.css';
 import type {RoomType} from "../../types.ts";
 import axios from "axios";
+import Reservation from "../Reservation/Reservation.Component.tsx";
 
 
 
 const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string|undefined}) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [roomType, setRoomType] = useState<RoomType|undefined>(undefined);
+    const [isBooking, setIsBooking] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchRoom = async () => {
             try{
-                const response = await axios.get(`https://hotelhub-b4gjgjhtf4esfvgh.polandcentral-01.azurewebsites.net/api/RoomType?id=${id}`);
+                const api = import.meta.env.VITE_API_URL
+                const response = await axios.get(`${api}/RoomType?id=${id}`);
                 if(response.status==200){
                     const {item} = response.data
                     setRoomType(item);
@@ -43,9 +46,9 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string|undefined}) =>
     };
 
     return (
+        <>
         <div className={styles.overlay}>
-            {roomType!=null?  <div className={styles.modal}>
-
+            {roomType!=null && !isBooking?  <div className={styles.modal}>
                 {/* LEFT COLUMN */}
                 <div className={styles.leftColumn}>
                     <div className={styles.imageContainer}>
@@ -93,7 +96,7 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string|undefined}) =>
                             {roomType?.description}
                         </p>
 
-                        <button className={styles.bookButton}>
+                        <button onClick={()=>setIsBooking(true)} className={styles.bookButton}>
                             Book from  ${roomType?.pricePerNight}
                         </button>
                     </div>
@@ -165,7 +168,10 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string|undefined}) =>
                     </div>
                 </div>
             </div>:""}
+            {isBooking? <Reservation setIsBooking = {setIsBooking} id={id} photo = {roomType?.photos[0].uri} price = {roomType?.pricePerNight} />: "" }
         </div>
+
+            </>
     );
 };
 
