@@ -1,4 +1,4 @@
-﻿import {useState, useEffect, type Dispatch, type SetStateAction, type ChangeEvent, type FormEvent} from 'react';
+﻿import {useState, useEffect, type Dispatch, type SetStateAction, type ChangeEvent} from 'react';
 import { Calendar, Tv, ShowerHead, Wifi, Utensils } from 'lucide-react';
 import styles from './Reservation.module.css';
 import Cookies from "js-cookie";
@@ -21,8 +21,8 @@ const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
 
     const formatDate = (date: Date) => date.toISOString().split('T')[0];
     const navigate = useNavigate();
-    const [checkIn, setCheckIn] = useState(formatDate(today));
-    const [checkOut, setCheckOut] = useState(formatDate(twoDaysLater));
+    const [checkIn, setCheckIn] = useState<string>(formatDate(today));
+    const [checkOut, setCheckOut] = useState<string>(formatDate(twoDaysLater));
     const [nights, setNights] = useState<number>(2);
     const [totalPrice, setTotalPrice] = useState(price * 2);
 
@@ -61,9 +61,16 @@ const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
             const api = import.meta.env.VITE_API_URL
             const response = await axios.post(api+"/reservation",formData,{
                 headers:{
+                    "Content-Type":"multipart/form-data",
                     Authorization:`Bearer ${token}`
                 }
             });
+            if(response.status==200){
+                console.log(response.data)
+            }
+            else{
+                console.log(response.data)
+            }
 
         }
         catch (error){
