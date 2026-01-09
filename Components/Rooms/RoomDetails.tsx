@@ -7,28 +7,37 @@ import styles from './styles/RoomDetails.module.css';
 import type {RoomType} from "../../types.ts";
 import axios from "axios";
 import Reservation from "../Reservation/Reservation.Component.tsx";
+import Confirmation from "./Confirmation.tsx";
 
 
 
-const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string|undefined}) => {
+const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string}) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [roomType, setRoomType] = useState<RoomType|undefined>(undefined);
     const [isBooking, setIsBooking] = useState<boolean>(false);
+    const [confirmation,setConfirmation] = useState<boolean>(false)
+    const [number,setNumber] = useState<number>(0);
 
     useEffect(() => {
         const fetchRoom = async () => {
-            try{
-                const api = import.meta.env.VITE_API_URL
-                const response = await axios.get(`${api}/RoomType?id=${id}`);
-                if(response.status==200){
-                    const {item} = response.data
-                    setRoomType(item);
+            if(id!==""){
+                try{
+                    const api = import.meta.env.VITE_API_URL
+                    const response = await axios.get(`${api}/RoomType?id=${id}`);
+                    if(response.status==200){
+                        const {item} = response.data
+                        setRoomType(item);
 
+                    }
+                }
+                catch (error){
+                    console.error(error)
                 }
             }
-            catch (error){
-                console.error(error)
+            else{
+                console.log("There is no id")
             }
+
         }
         fetchRoom();
     }, []);
@@ -48,7 +57,8 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string|undefined}) =>
     return (
         <>
         <div className={styles.overlay}>
-            {roomType!=null && !isBooking?  <div className={styles.modal}>
+
+            {roomType!=null && !isBooking && !confirmation?  <div className={styles.modal}>
                 {/* LEFT COLUMN */}
                 <div className={styles.leftColumn}>
                     <div className={styles.imageContainer}>
@@ -168,7 +178,8 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string|undefined}) =>
                     </div>
                 </div>
             </div>:""}
-            {isBooking? <Reservation setIsBooking = {setIsBooking} id={id} photo = {roomType?.photos[0].uri} price = {roomType?.pricePerNight} />: "" }
+            {isBooking? <Reservation onClose={onClose} setNumber = {setNumber} setIsBooking = {setIsBooking} id={id} photo = {roomType?.photos[0].uri} price = {roomType?.pricePerNight} setConfirmation={setConfirmation}   />: "" }
+            {!isBooking && confirmation ? <Confirmation room={roomType?.name} number={number} onClose = {onClose}  />:""}
         </div>
 
             </>

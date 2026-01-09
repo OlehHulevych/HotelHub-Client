@@ -2,6 +2,7 @@
 import Footer from "./Footer/Footer.tsx";
 import {TabLayout} from "../context/TabContext.tsx";
 import Main from "./Main/Main.tsx";
+import  "../src/App.css"
 import RoomsPage from "./Rooms/Rooms.tsx";
 import {AuthLayout} from "../context/AuthContext.tsx";
 

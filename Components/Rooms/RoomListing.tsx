@@ -4,13 +4,18 @@ import type {RoomType} from "../../types.ts";
 import axios from 'axios';
 import {useState, useEffect} from "react";
 import RoomDetails from "./RoomDetails.tsx";
+import {getItem, setItem} from "../../Helpers/localStorageService.ts";
 
 
 
 const RoomListing = () => {
     const [rooms,setRooms] = useState<RoomType[]>([]);
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [id,setId] = useState<string>();
+    const [isOpen, setIsOpen] = useState<boolean>(():boolean=>{
+        return getItem("room_wind") || false
+    })
+    const [id,setId] = useState(()=>{
+        return getItem("room_id") || "";
+    });
     const api_url = import.meta.env.VITE_API_URL
 
     const openDetails  =(id:string):void => {
@@ -43,6 +48,22 @@ const RoomListing = () => {
         fetchRooms();
 
     },[])
+
+    useEffect(() => {
+        const update=()=>{
+            setItem("room_wind", isOpen)
+            console.log(isOpen)
+        }
+
+       update();
+
+    }, [isOpen]);
+
+
+    useEffect(() => {
+        setItem("room_id", id)
+
+    }, [id]);
     return (
         <section className={styles.section}>
             <div className={styles.grid}>
@@ -85,7 +106,7 @@ const RoomListing = () => {
                     </div>
                 ))}
 
-                {isOpen? <RoomDetails onClose = {onClose} id={id}/> : ""}
+                {isOpen? <RoomDetails onClose={onClose} id={id} />:""}
 
             </div>
         </section>

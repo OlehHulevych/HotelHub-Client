@@ -1,0 +1,87 @@
+﻿/* Confirmation.module.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.iconCircle {
+    width: 80px;
+    height: 80px;
+    background-color: #4CAF50; /* Success Green */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+}
+
+.checkIcon {
+    color: white;
+    stroke-width: 3px;
+}
+
+.title {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 1rem 0;
+}
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 4px;
+}
+
+.message {
+    font-family: 'Segoe UI', sans-serif;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.subMessage {
+    font-family: 'Segoe UI', sans-serif;
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Animation for the card appearing */
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

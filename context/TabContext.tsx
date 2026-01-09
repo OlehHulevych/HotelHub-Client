@@ -1,14 +1,31 @@
-﻿import {createContext, useState, type Dispatch, type SetStateAction, type ReactNode, useContext} from "react";
+﻿import {
+    createContext,
+    useState,
+    type Dispatch,
+    type SetStateAction,
+    type ReactNode,
+    useContext,
+    useEffect
+} from "react";
+import {setItem,getItem} from "../Helpers/localStorageService.ts";
 
 export interface contextTabProps  {
     currentTab:string,
     setCurrentTab:Dispatch<SetStateAction<string>>
+
 }
 
  export const TabContext = createContext<contextTabProps|undefined>(undefined);
 
 export const TabLayout = ({children}:{children:ReactNode}) => {
-    const [currentTab, setCurrentTab] = useState("Home")
+
+    const [currentTab, setCurrentTab] = useState(()=>{
+        return getItem("tab") || "Home"
+    })
+    useEffect(() => {
+        setItem("tab", currentTab)
+    }, [currentTab]);
+
     return (
         <TabContext.Provider value={{currentTab, setCurrentTab}}>
             {children}

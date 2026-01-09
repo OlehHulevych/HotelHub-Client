@@ -7,6 +7,7 @@
     background-color: #fff;
     font-family: 'Segoe UI', sans-serif;
     color: #333;
+    position: relative;
 }
 
 .container {
@@ -194,6 +195,17 @@
 
 .bookButton:hover {
     background-color: #705d44;
+}
+
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 4px;
 }
 
 /* Responsive */

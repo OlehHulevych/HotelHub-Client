@@ -1,0 +1,16 @@
+.statusMessage{
+    position: absolute;
+    top:-100%;
+    color: white;
+    width: 350px;
+    font-family: "Roboto", serif;
+    border-radius: 20px;
+    padding: 15px 20px;
+    background-color: #2ecc71;
+    text-align: center;
+    left: 40%;
+
+}
+.active{
+    top:5%;
+}

@@ -1,5 +1,5 @@
 ﻿import {useState, useEffect, type Dispatch, type SetStateAction, type ChangeEvent} from 'react';
-import { Calendar, Tv, ShowerHead, Wifi, Utensils } from 'lucide-react';
+import {Calendar, Tv, ShowerHead, Wifi, Utensils, X} from 'lucide-react';
 import styles from './Reservation.module.css';
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router";
@@ -9,12 +9,15 @@ import axios from "axios";
 
 interface componentProps {
     setIsBooking: Dispatch<SetStateAction<boolean>>,
+    setNumber: Dispatch<SetStateAction<number>>,
+    setConfirmation: Dispatch<SetStateAction<boolean>>,
     id:string,
-    photo:string,
+    onClose:()=>void,
+    photo:string
     price:number
 }
 
-const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
+const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setConfirmation}:componentProps) => {
     const today = new Date();
     const twoDaysLater = new Date(today);
     twoDaysLater.setDate(today.getDate() + 2);
@@ -24,6 +27,7 @@ const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
     const [checkIn, setCheckIn] = useState<string>(formatDate(today));
     const [checkOut, setCheckOut] = useState<string>(formatDate(twoDaysLater));
     const [nights, setNights] = useState<number>(2);
+
     const [totalPrice, setTotalPrice] = useState(price * 2);
 
 
@@ -40,7 +44,7 @@ const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
                 const diffTime = Math.abs(end.getTime() - start.getTime());
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-                // Ensure positive nights (if checkout is before checkin, handle gracefully)
+
                 const validNights:number = diffDays > 0 && end > start ? diffDays : 0;
 
                 setNights(validNights);
@@ -67,6 +71,10 @@ const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
             });
             if(response.status==200){
                 console.log(response.data)
+                const number:number = response.data.item.room.number
+                setNumber(number);
+                setConfirmation(true)
+                setIsBooking(false)
             }
             else{
                 console.log(response.data)
@@ -80,8 +88,14 @@ const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
 
     return (
         <section className={styles.section}>
+            <button className={styles.closeButton} onClick={()=>onClose()}>
+                <X size={24} />
+            </button>
             <form onSubmit={(e:ChangeEvent<HTMLFormElement>)=>formHandler(e)} encType={"multipart/form-data"}  method={"post"} className={styles.container}>
+
                 <h1 className={styles.pageTitle}>Your Reservation</h1>
+
+
 
                 <div className={styles.contentWrapper}>
 
@@ -98,7 +112,7 @@ const Reservation = ({setIsBooking, id, photo, price}:componentProps) => {
                             </div>
                             <div className={styles.roomDetails}>
                                 <h3 className={styles.roomTitle}>The Royal Room</h3>
-                                <div className={styles.roomPrice}>${price.toLocaleString()}</div>
+                                <div className={styles.roomPrice}>${price?.toLocaleString()}</div>
                             </div>
                             <div className={styles.amenitiesRow}>
                                 <Tv size={18} className={styles.amenityIcon} />
