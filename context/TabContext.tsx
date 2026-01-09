@@ -24,6 +24,7 @@ export const TabLayout = ({children}:{children:ReactNode}) => {
     })
     useEffect(() => {
         setItem("tab", currentTab)
+        console.log(currentTab)
     }, [currentTab]);
 
     return (

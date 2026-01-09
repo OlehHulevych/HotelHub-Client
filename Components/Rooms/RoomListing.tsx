@@ -11,7 +11,7 @@ import {getItem, setItem} from "../../Helpers/localStorageService.ts";
 const RoomListing = () => {
     const [rooms,setRooms] = useState<RoomType[]>([]);
     const [isOpen, setIsOpen] = useState<boolean>(():boolean=>{
-        return getItem("room_wind") || false
+        return getItem("room_wind")==="true"
     })
     const [id,setId] = useState(()=>{
         return getItem("room_id") || "";
