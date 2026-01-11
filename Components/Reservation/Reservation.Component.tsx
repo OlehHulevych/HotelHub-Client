@@ -4,7 +4,7 @@ import styles from './Reservation.module.css';
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router";
 import axios from "axios";
-import {getItem, setItem} from "../../Helpers/localStorageService.ts";
+import { setItem} from "../../Helpers/localStorageService.ts";
 
 
 

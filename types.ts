@@ -23,4 +23,20 @@ export interface Detail {
 
 }
 
+export interface Room {
+    Id:string,
+    Number:number,
+    RoomTypeId:string,
+    RoomType:RoomType
+}
+
+export interface Reservation {
+    Id:string,
+    checkInDate:Date,
+    checkOutDate:Date
+    Room:Room[],
+    TotalPrice:number
+
+}
+
 
