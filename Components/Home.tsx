@@ -5,10 +5,11 @@ import Main from "./Main/Main.tsx";
 import  "../src/App.css"
 import RoomsPage from "./Rooms/Rooms.tsx";
 import {AuthLayout} from "../context/AuthContext.tsx";
-
+import {useEffect} from "react";
 
 
 const Home = () => {
+
     return (
         <AuthLayout>
             <TabLayout>

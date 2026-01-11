@@ -1,7 +1,7 @@
 ﻿
 export const setItem = (key:string,value:any)=>{
     try{
-        localStorage.setItem(key, value);
+        sessionStorage.setItem(key, value);
     }
     catch (error){
         console.error("Error saving in localstorage occurred: "+error)
@@ -10,7 +10,7 @@ export const setItem = (key:string,value:any)=>{
 
 export const getItem = (key:string):any|undefined => {
     try{
-        const item = localStorage.getItem(key);
+        const item = sessionStorage.getItem(key);
         return item? item:undefined
     }
     catch (error){

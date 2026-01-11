@@ -36,6 +36,7 @@ export default tseslint.config(
 
           "no-unused-vars": "off",
           "@typescript-eslint/no-explicit-any": ["off"],
+          "@typescript-eslint/no-unused-expressions": ["off"],
 
           // Configure the TypeScript rule
           "@typescript-eslint/no-unused-vars": [

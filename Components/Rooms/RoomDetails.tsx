@@ -8,15 +8,20 @@ import type {RoomType} from "../../types.ts";
 import axios from "axios";
 import Reservation from "../Reservation/Reservation.Component.tsx";
 import Confirmation from "./Confirmation.tsx";
+import {getItem, setItem} from "../../Helpers/localStorageService.ts";
 
 
 
 const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string}) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [roomType, setRoomType] = useState<RoomType|undefined>(undefined);
-    const [isBooking, setIsBooking] = useState<boolean>(false);
+    const [isBooking, setIsBooking] = useState<boolean>(()=>getItem("isBooking")==="true");
     const [confirmation,setConfirmation] = useState<boolean>(false)
     const [number,setNumber] = useState<number>(0);
+
+    useEffect(() => {
+        setItem("isBooking", isBooking)
+    }, [isBooking]);
 
     useEffect(() => {
         const fetchRoom = async () => {

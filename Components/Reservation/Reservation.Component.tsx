@@ -4,6 +4,7 @@ import styles from './Reservation.module.css';
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router";
 import axios from "axios";
+import {getItem, setItem} from "../../Helpers/localStorageService.ts";
 
 
 
@@ -24,8 +25,8 @@ const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setCon
 
     const formatDate = (date: Date) => date.toISOString().split('T')[0];
     const navigate = useNavigate();
-    const [checkIn, setCheckIn] = useState<string>(formatDate(today));
-    const [checkOut, setCheckOut] = useState<string>(formatDate(twoDaysLater));
+    const [checkIn, setCheckIn] = useState(formatDate(today));
+    const [checkOut, setCheckOut] = useState(formatDate(twoDaysLater));
     const [nights, setNights] = useState<number>(2);
 
     const [totalPrice, setTotalPrice] = useState(price * 2);
@@ -33,6 +34,7 @@ const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setCon
 
     // Recalculate price whenever dates change
     const token = Cookies.get("token");
+
     useEffect(() => {
         if(token==null){
             navigate("/authorize?type=login");
@@ -52,7 +54,7 @@ const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setCon
             }
         }
         editNights();
-    }, [checkIn, checkOut]);
+    }, [checkIn, checkOut, navigate, price, token]);
 
     const formHandler = async (e:ChangeEvent<HTMLFormElement>) =>{
         e.preventDefault();
@@ -88,7 +90,11 @@ const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setCon
 
     return (
         <section className={styles.section}>
-            <button className={styles.closeButton} onClick={()=>onClose()}>
+            <button className={styles.closeButton} onClick={()=>{
+                onClose()
+                setIsBooking(false)
+                setItem("isBooking", false)
+            }}>
                 <X size={24} />
             </button>
             <form onSubmit={(e:ChangeEvent<HTMLFormElement>)=>formHandler(e)} encType={"multipart/form-data"}  method={"post"} className={styles.container}>
