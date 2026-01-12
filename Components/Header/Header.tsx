@@ -22,7 +22,9 @@ const Header = () => {
                 </nav>
                 <div className={style.button_block}>
                     {user!=null?(
-                        <img className={style.avatar} src={user.avatarUser.avatarPath} alt=""/>
+                        <Link to={"/profile"}>
+                            <img className={style.avatar} src={user.avatarUser.avatarPath} alt=""/>
+                        </Link>
                     ):(<button className={style.login_button}><Link to="/authorize?type=login">Log in</Link></button>)}
 
 

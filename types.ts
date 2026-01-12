@@ -27,16 +27,23 @@ export interface Room {
     Id:string,
     Number:number,
     RoomTypeId:string,
-    RoomType:RoomType
+    Type:RoomType
 }
 
 export interface Reservation {
     Id:string,
     checkInDate:Date,
     checkOutDate:Date
-    Room:Room[],
+    Room:Room,
+    status:Status,
     TotalPrice:number
 
+}
+
+
+export enum Status {
+    Active="Active",
+    Past = "Canceled"
 }
 
 
