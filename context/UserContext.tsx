@@ -32,7 +32,7 @@ export const UserLayout = ({children}:{children:ReactNode}) => {
         const fetchReservatins = async () => {
             const token = Cookies.get("token")
             if(token==null){
-                return
+                return;
             }
             try{
                 const response = await axios.get( api_url+ "/reservation/user",{
@@ -41,15 +41,19 @@ export const UserLayout = ({children}:{children:ReactNode}) => {
                     }
                 });
                 if(response.status==200){
-                    const {items} = response.data
+                    const fetchedData = response.data.items; // Capture data in a variable
 
-                    setPastReservations(items);
-                    setActiveReservations(items);
-                    console.log(pastReservations)
+                    setPastReservations(fetchedData.filter((item:Reservation)=>item.status === Status.Past));
+                    setActiveReservations(fetchedData.filter((item:Reservation)=>item.status === Status.Active));
+
+                    // FIX: Log the variable 'fetchedData', NOT the state 'pastReservations'
+                    console.log("Real data from API:", fetchedData);
+
 
                 }
                 else{
-                    console.log("Error occured")
+                    console.log("Error occurred")
+
                 }
             }
             catch (error){
@@ -57,7 +61,7 @@ export const UserLayout = ({children}:{children:ReactNode}) => {
             }
         }
         fetchReservatins();
-    },[]);
+    },[api_url]);
 
     return (
         <UserContext.Provider value={{ tab, setTab, activeReservations, pastReservations}}>

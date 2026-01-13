@@ -27,14 +27,14 @@ export interface Room {
     Id:string,
     Number:number,
     RoomTypeId:string,
-    Type:RoomType
+    type:RoomType
 }
 
 export interface Reservation {
     Id:string,
     checkInDate:Date,
     checkOutDate:Date
-    Room:Room,
+    room:Room,
     status:Status,
     TotalPrice:number
 

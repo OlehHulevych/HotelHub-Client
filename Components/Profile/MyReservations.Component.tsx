@@ -16,22 +16,31 @@ const MyReservations = () => {
     const {pastReservations, activeReservations} = useInfo();
     const [reservations, setReservations] = useState<Reservation[]|undefined>(activeReservations)
 
+    const formatDate= (dateInput)=> {
+        const date = new Date(dateInput);
+        const number = date.getDate();
+        const month = date.toLocaleString('default', {month:"short"});
+        return `${number} ${month}`
+    }
+
     useEffect(() => {
         const getReservations = () =>{
             if(activeTab===Past){
 
                 setReservations(pastReservations);
-
+                console.log("Hello nigga")
 
             }
             else{
                 setReservations(activeReservations);
+                console.log("Hello nigga")
 
 
             }
         }
         getReservations();
-    },[activeTab]);
+    },[Past, activeReservations, activeTab, pastReservations]);
+
     return (
         <main className={styles.mainContent}>
 
@@ -52,20 +61,20 @@ const MyReservations = () => {
             </div>
 
             {/* List Section */}
-            <h2 className={styles.pageTitle}>Past Reservations</h2>
+            <h2 className={styles.pageTitle}>{activeTab===Past?"Past":"Active"} Reservations</h2>
 
             <div className={styles.listContainer}>
-                {reservations?.map((reservation:Reservation) => (
+                {reservations!== undefined && reservations?.length>0 ? reservations?.map((reservation) => (
                     <div key={reservation.Id} className={styles.card}>
 
                         {/* Left: Image */}
                         <div className={styles.cardImageWrapper}>
-                            <img src={reservation.Room.Type?.photos[0].uri} alt={reservation.Room.Type?.name} className={styles.cardImage} />
+                            <img src={reservation.room.type?.photos[0].uri} alt={reservation.room.type?.name} className={styles.cardImage} />
                         </div>
 
                         {/* Middle: Info */}
                         <div className={styles.cardInfo}>
-                            <h3 className={styles.roomName}>{reservation.Room.Type?.name}</h3>
+                            <h3 className={styles.roomName}>{reservation.room.type?.name}</h3>
                             <div className={styles.price}>{reservation.TotalPrice}</div>
 
                             {/* Amenities Icons */}
@@ -78,16 +87,13 @@ const MyReservations = () => {
 
                         {/* Right: Rating & Date */}
                         <div className={styles.cardRight}>
-                            <div className={styles.stars}>
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                    <Star key={star} size={14} className={styles.starIcon} />
-                                ))}
-                            </div>
-                            <span className={styles.dateRange}>{reservation.checkInDate.toISOString()}</span>
+
+                            <span className={styles.dateRange}>{formatDate(reservation.checkInDate)} - {formatDate(reservation.checkOutDate)} </span>
                         </div>
 
                     </div>
-                ))}
+                )):"" }
+
             </div>
 
         </main>
