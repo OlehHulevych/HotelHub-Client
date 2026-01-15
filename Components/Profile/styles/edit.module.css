@@ -1,0 +1,144 @@
+﻿/* EditModal.module.css */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers modal vertically and horizontally */
+    z-index: 1000;
+    backdrop-filter: blur(1px); /* Subtle blur effect on background */
+}
+
+.modal {
+    background-color: #fff;
+    width: 90%;
+    max-width: 550px; /* Fixed width like the image */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* --- Header --- */
+.header {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* --- Body --- */
+.body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.inputRow {
+    display: grid;
+    grid-template-columns: 90px 1fr; /* Fixed label width, remaining space for input */
+    align-items: center;
+    gap: 1rem;
+}
+
+.label {
+    font-size: 0.95rem;
+    color: #555;
+    font-weight: 500;
+    text-align: right;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 36px 10px 12px; /* Extra padding on right for icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    border-color: #2196F3; /* Blue focus color */
+}
+
+.calendarIcon {
+    position: absolute;
+    right: 10px;
+    color: #999;
+    pointer-events: none;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 1rem 2rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end; /* Aligns buttons to the right */
+    gap: 1rem;
+    background-color: #f9f9f9;
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.cancelBtn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.cancelBtn:hover {
+    background-color: #d0d0d0;
+}
+
+.saveBtn {
+    background-color: #1976D2; /* A nice distinct blue matching the image */
+    color: white;
+}
+
+.saveBtn:hover {
+    background-color: #1565C0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .inputRow {
+        grid-template-columns: 1fr; /* Stack label and input on small screens */
+        gap: 0.5rem;
+    }
+    .label {
+        text-align: left;
+    }
+}

@@ -1,12 +1,9 @@
 ﻿import {useEffect, useState} from 'react';
 import styles from "./styles/main.module.css"
-import {Tv,
-    ShowerHead,
-    Wifi,
-    Star} from "lucide-react"
+import {Edit, ShowerHead, Trash2, Tv, Wifi} from "lucide-react"
 import {useInfo} from "../../context/UserContext.tsx";
-import type {Reservation} from "../../types.ts";
-import {Status} from "../../types.ts";
+import {type Reservation, Status} from "../../types.ts";
+import EditComponent from "./EditReservation.Component.tsx";
 
 const MyReservations = () => {
 
@@ -16,7 +13,28 @@ const MyReservations = () => {
     const {pastReservations, activeReservations} = useInfo();
     const [reservations, setReservations] = useState<Reservation[]|undefined>(activeReservations)
 
-    const formatDate= (dateInput)=> {
+    const [reservationId, setReservationId] = useState<string|null>(null);
+    const [editCheckIn, setEditCheckIn] = useState<Date|null>(null);
+    const [editCheckOut, setEditCheckOut] = useState<Date|null>(null);
+    const [editClose, setEditClose] =useState<boolean>(false);
+
+    const onClose = () => {
+        setEditCheckIn(null)
+        setEditCheckOut(null)
+        setReservationId(null)
+        setEditClose(false)
+    }
+
+    const setEditReservation = (checkIn:Date, checkOut:Date, reservationId:string, ) =>{
+        console.log(reservationId)
+        setReservationId(reservationId)
+        setEditCheckOut(checkOut)
+        setEditCheckIn(checkIn);
+        setEditClose(true)
+    }
+
+
+    const formatDate= (dateInput:any)=> {
         const date = new Date(dateInput);
         const number = date.getDate();
         const month = date.toLocaleString('default', {month:"short"});
@@ -65,7 +83,7 @@ const MyReservations = () => {
 
             <div className={styles.listContainer}>
                 {reservations!== undefined && reservations?.length>0 ? reservations?.map((reservation) => (
-                    <div key={reservation.Id} className={styles.card}>
+                    <div  key={reservation.id} className={styles.card}>
 
                         {/* Left: Image */}
                         <div className={styles.cardImageWrapper}>
@@ -83,7 +101,18 @@ const MyReservations = () => {
                                 <ShowerHead size={16} className={styles.icon} />
                                 <Wifi size={16} className={styles.icon} />
                             </div>
+                            {reservation.status !== Status.Past && (<div className={styles.actionButtons}>
+                                <button onClick={()=>setEditReservation(reservation.checkInDate, reservation.checkOutDate, reservation.id)} className={`${styles.actionBtn} ${styles.editBtn}`}>
+                                    <Edit size={14} /> Edit
+                                </button>
+                                <button className={`${styles.actionBtn} ${styles.cancelBtn}`}>
+                                    <Trash2 size={14} /> Cancel
+                                </button>
+                            </div>)}
+
                         </div>
+
+
 
                         {/* Right: Rating & Date */}
                         <div className={styles.cardRight}>
@@ -95,7 +124,7 @@ const MyReservations = () => {
                 )):"" }
 
             </div>
-
+            {editClose &&  <EditComponent  onClose={onClose} isOpen={editClose} initialStart={editCheckIn} initialEnd={editCheckOut} reservationId={reservationId}/>}
         </main>
     );
 };

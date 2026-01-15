@@ -13,6 +13,8 @@ import axios from "axios";
 
 
 interface contextProps {
+    edited:boolean,
+    setEdited:Dispatch<SetStateAction<boolean>>,
     pastReservations:Reservation[]|undefined,
     activeReservations:Reservation[]|undefined,
     setTab:Dispatch<SetStateAction<string>>
@@ -23,6 +25,7 @@ interface contextProps {
 const UserContext = createContext<contextProps|undefined>(undefined);
 
 export const UserLayout = ({children}:{children:ReactNode}) => {
+    const [edited,setEdited] = useState<boolean>(false);
     const [pastReservations, setPastReservations] = useState([]);
     const [activeReservations, setActiveReservations] = useState([])
     const [tab, setTab]=useState<string>("reservations")
@@ -48,6 +51,7 @@ export const UserLayout = ({children}:{children:ReactNode}) => {
 
                     // FIX: Log the variable 'fetchedData', NOT the state 'pastReservations'
                     console.log("Real data from API:", fetchedData);
+                    setEdited(false);
 
 
                 }
@@ -61,10 +65,10 @@ export const UserLayout = ({children}:{children:ReactNode}) => {
             }
         }
         fetchReservatins();
-    },[api_url]);
+    },[api_url, edited]);
 
     return (
-        <UserContext.Provider value={{ tab, setTab, activeReservations, pastReservations}}>
+        <UserContext.Provider value={{ tab, setTab, activeReservations, pastReservations, setEdited, edited}}>
             {children}
         </UserContext.Provider>
     )

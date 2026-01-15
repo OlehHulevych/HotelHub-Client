@@ -31,7 +31,7 @@ export interface Room {
 }
 
 export interface Reservation {
-    Id:string,
+    id:string,
     checkInDate:Date,
     checkOutDate:Date
     room:Room,

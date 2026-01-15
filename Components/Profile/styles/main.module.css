@@ -180,6 +180,47 @@
     color: #888;
 }
 
+.actionButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem; /* Spacing from amenities */
+}
+
+.actionBtn {
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+/* Edit Button (Brand Color) */
+.editBtn {
+    border: 1px solid #8B7355;
+    color: #8B7355;
+}
+
+.editBtn:hover {
+    background-color: #8B7355;
+    color: #fff;
+}
+
+/* Cancel Button (Red) */
+.cancelBtn {
+    border: 1px solid #d32f2f; /* Red color */
+    color: #d32f2f;
+}
+
+.cancelBtn:hover {
+    background-color: #d32f2f;
+    color: #fff;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .dashboardContainer {
