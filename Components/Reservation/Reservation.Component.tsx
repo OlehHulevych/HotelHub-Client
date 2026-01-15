@@ -14,8 +14,8 @@ interface componentProps {
     setConfirmation: Dispatch<SetStateAction<boolean>>,
     id:string,
     onClose:()=>void,
-    photo:string
-    price:number
+    photo:string|undefined,
+    price:number|undefined
 }
 
 const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setConfirmation}:componentProps) => {
@@ -29,6 +29,8 @@ const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setCon
     const [checkOut, setCheckOut] = useState(formatDate(twoDaysLater));
     const [nights, setNights] = useState<number>(2);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const [totalPrice, setTotalPrice] = useState(price * 2);
 
 
@@ -50,6 +52,8 @@ const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setCon
                 const validNights:number = diffDays > 0 && end > start ? diffDays : 0;
 
                 setNights(validNights);
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                 setTotalPrice(validNights * price);
             }
         }

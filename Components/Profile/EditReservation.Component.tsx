@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import {useInfo} from "../../context/UserContext.tsx";
 
-const EditComponent = ({ isOpen, onClose, initialStart, initialEnd, reservationId }:{isOpen:boolean, onClose:()=>void, initialStart:Date, initialEnd:Date, reservationId:string|null}) => {
+const EditComponent = ({ isOpen, onClose, initialStart, initialEnd, reservationId }:{isOpen:boolean, onClose:()=>void, initialStart:Date|null, initialEnd:Date|null, reservationId:string|null}) => {
     // State to manage input values
     // Pre-filling with the values from the image as defaults if props aren't provided
 
