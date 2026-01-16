@@ -4,6 +4,8 @@ import {Edit, ShowerHead, Trash2, Tv, Wifi} from "lucide-react"
 import {useInfo} from "../../context/UserContext.tsx";
 import {type Reservation, Status} from "../../types.ts";
 import EditComponent from "./EditReservation.Component.tsx";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const MyReservations = () => {
 
@@ -17,6 +19,7 @@ const MyReservations = () => {
     const [editCheckIn, setEditCheckIn] = useState<Date|null>(null);
     const [editCheckOut, setEditCheckOut] = useState<Date|null>(null);
     const [editClose, setEditClose] =useState<boolean>(false);
+    const {setEdited} = useInfo();
 
     const onClose = () => {
         setEditCheckIn(null)
@@ -39,6 +42,30 @@ const MyReservations = () => {
         const number = date.getDate();
         const month = date.toLocaleString('default', {month:"short"});
         return `${number} ${month}`
+    }
+
+    const cancelRerservationHandler = async ( id:string) => {
+        const token = Cookies.get("token");
+        if(token==null){
+            return;
+        }
+        try{
+            const response = await axios.delete(import.meta.env.VITE_API_URL+"/reservation?id="+id, {
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization:"Bearer "+token
+                }
+            });
+            if(response.status==200){
+                setEdited(true);
+            }
+            else{
+                console.log(response);
+            }
+        }
+        catch(error){
+            console.error("Error occurred: "+error)
+        }
     }
 
     useEffect(() => {
@@ -105,7 +132,7 @@ const MyReservations = () => {
                                 <button onClick={()=>setEditReservation(reservation.checkInDate, reservation.checkOutDate, reservation.id)} className={`${styles.actionBtn} ${styles.editBtn}`}>
                                     <Edit size={14} /> Edit
                                 </button>
-                                <button className={`${styles.actionBtn} ${styles.cancelBtn}`}>
+                                <button onClick={()=>cancelRerservationHandler(reservation.id)} className={`${styles.actionBtn} ${styles.cancelBtn}`}>
                                     <Trash2 size={14} /> Cancel
                                 </button>
                             </div>)}
