@@ -6,8 +6,7 @@ import axios from "axios";
 import {useInfo} from "../../context/UserContext.tsx";
 
 const EditComponent = ({ isOpen, onClose, initialStart, initialEnd, reservationId }:{isOpen:boolean, onClose:()=>void, initialStart:Date|null, initialEnd:Date|null, reservationId:string|null}) => {
-    // State to manage input values
-    // Pre-filling with the values from the image as defaults if props aren't provided
+
 
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -29,7 +28,6 @@ const EditComponent = ({ isOpen, onClose, initialStart, initialEnd, reservationI
     if (!isOpen) return null;
 
     const handleSaveClick = async(e:FormEvent<HTMLFormElement>) => {
-        // Pass the updated dates back to the parent component
         e.preventDefault();
         const token = Cookies.get("token");
         if(token==null){
@@ -61,7 +59,6 @@ const EditComponent = ({ isOpen, onClose, initialStart, initialEnd, reservationI
         catch (error){
             console.error("Error occurred "+error)
         }
-       // onClose();
     };
 
 

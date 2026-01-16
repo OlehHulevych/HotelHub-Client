@@ -40,6 +40,12 @@ export interface Reservation {
 
 }
 
+export enum userTabs {
+    Reservations = "reservations",
+    Info = "profile"
+
+}
+
 
 export enum Status {
     Active="Active",

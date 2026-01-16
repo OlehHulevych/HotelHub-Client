@@ -34,7 +34,7 @@ const Reservation = ({setIsBooking, onClose, setNumber, id, photo, price, setCon
     const [totalPrice, setTotalPrice] = useState(price * 2);
 
 
-    // Recalculate price whenever dates change
+
     const token = Cookies.get("token");
 
     useEffect(() => {

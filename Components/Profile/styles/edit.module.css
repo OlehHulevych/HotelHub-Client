@@ -1,4 +1,4 @@
-﻿/* EditModal.module.css */
+﻿
 
 .overlay {
     position: fixed;
@@ -6,18 +6,18 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-    align-items: center; /* Centers modal vertically and horizontally */
+    align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(1px); /* Subtle blur effect on background */
+    backdrop-filter: blur(1px);
 }
 
 .modal {
     background-color: #fff;
     width: 90%;
-    max-width: 550px; /* Fixed width like the image */
+    max-width: 550px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     overflow: hidden;
@@ -25,7 +25,7 @@
     animation: fadeIn 0.3s ease-out;
 }
 
-/* --- Header --- */
+
 .header {
     padding: 1.5rem;
     text-align: center;
@@ -39,7 +39,7 @@
     font-weight: 600;
 }
 
-/* --- Body --- */
+
 .body {
     padding: 2rem;
     display: flex;
@@ -49,7 +49,7 @@
 
 .inputRow {
     display: grid;
-    grid-template-columns: 90px 1fr; /* Fixed label width, remaining space for input */
+    grid-template-columns: 90px 1fr;
     align-items: center;
     gap: 1rem;
 }
@@ -69,7 +69,7 @@
 
 .input {
     width: 100%;
-    padding: 10px 36px 10px 12px; /* Extra padding on right for icon */
+    padding: 10px 36px 10px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 0.95rem;
@@ -79,7 +79,7 @@
 }
 
 .input:focus {
-    border-color: #2196F3; /* Blue focus color */
+    border-color: #2196F3;
 }
 
 .calendarIcon {
@@ -89,12 +89,12 @@
     pointer-events: none;
 }
 
-/* --- Footer --- */
+
 .footer {
     padding: 1rem 2rem;
     border-top: 1px solid #eee;
     display: flex;
-    justify-content: flex-end; /* Aligns buttons to the right */
+    justify-content: flex-end;
     gap: 1rem;
     background-color: #f9f9f9;
 }
@@ -119,7 +119,7 @@
 }
 
 .saveBtn {
-    background-color: #1976D2; /* A nice distinct blue matching the image */
+    background-color: #1976D2;
     color: white;
 }
 
@@ -132,10 +132,10 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
     .inputRow {
-        grid-template-columns: 1fr; /* Stack label and input on small screens */
+        grid-template-columns: 1fr;
         gap: 0.5rem;
     }
     .label {

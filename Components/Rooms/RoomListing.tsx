@@ -78,7 +78,6 @@ const RoomListing = () => {
                             />
                         </div>
 
-                        {/* Content Area */}
                         <div className={styles.details}>
                             <h3 onClick={()=>openDetails(room.id)} className={styles.title}>{room.name}</h3>
                             <div className={styles.price}>

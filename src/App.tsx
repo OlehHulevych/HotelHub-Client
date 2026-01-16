@@ -5,6 +5,7 @@ import About from "../Components/About.tsx";
 import Authorization from "../Components/Authorization/Authorization.tsx";
 import Profile from "../Components/Profile/Profile.Component.tsx";
 import UserLayout from "../context/UserContext.tsx";
+import {AuthLayout} from "../context/AuthContext.tsx";
 
 function App() {
     return (
@@ -14,9 +15,11 @@ function App() {
            <Route path= "/authorize" element={<Authorization/>}/>
            <Route path= "/authorize" element={<Authorization/>}/>
            <Route path = "/profile" element={
-               <UserLayout>
-                   <Profile/>
-               </UserLayout>
+               <AuthLayout>
+                   <UserLayout>
+                       <Profile/>
+                   </UserLayout>
+               </AuthLayout>
            } />
 
        </Routes>
