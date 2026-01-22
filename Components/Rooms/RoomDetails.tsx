@@ -148,7 +148,7 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string}) => {
                         <div className={styles.highlightItem}>
                             <Users className={styles.highlightIcon} size={20} />
                             <div className={styles.highlightText}>
-                                <h4>Occupancy</h4>
+                                <h4>Capacity</h4>
                                 <p>{roomType.detail.capacity}</p>
                             </div>
                         </div>

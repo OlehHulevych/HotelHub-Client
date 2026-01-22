@@ -2,6 +2,8 @@
 import styles from './styles/profile.module.css';
 import {useAuth} from "../../context/AuthContext.tsx";
 import ChangePasswordModal from "./ChangePassword.Component.tsx";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const UserProfile = () => {
     const {user} = useAuth();
@@ -37,13 +39,30 @@ const UserProfile = () => {
         }
     };
 
-    const handleSave = (e:ChangeEvent<HTMLFormElement>) => {
+    const handleSave = async (e:ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        console.log('Saving profile:', formData);
-
-        // Add API call logic here
-
+        const token = Cookies.get("token");
+        if(!token){
+           return;
+        }
+        const formData = new FormData(e.target);
+        try{
+            const response = await axios.post(import.meta.env.VITE_API_URL+"/user/update",formData, {
+                headers:{
+                    "Content-type":"multipart/form-data",
+                    Authorization:"Bearer "+token
+                }
+            });
+            if(response.status==200){
+                console.log(response.data.message)
+            }
+            else{
+                console.error(response.data.message)
+            }
+        }
+        catch(error){
+            console.error("Error occurred "+error)
+        }
     };
 
 
@@ -68,6 +87,7 @@ const UserProfile = () => {
                         Change Photo
                     </label>
                     <input
+                        name={"photoFile"}
                         id="avatar-upload"
                         type="file"
                         accept="image/*"
@@ -93,7 +113,7 @@ const UserProfile = () => {
                         <label className={styles.label}>Full Name</label>
                         <input
                             type="text"
-                            name="fullName"
+                            name="name"
                             value={formData.fullName}
                             onChange={handleChange}
                             className={styles.input}
