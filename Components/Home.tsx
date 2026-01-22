@@ -5,6 +5,8 @@ import Main from "./Main/Main.tsx";
 import  "../src/App.css"
 import RoomsPage from "./Rooms/Rooms.tsx";
 import {AuthLayout} from "../context/AuthContext.tsx";
+import AboutUs from "./AboutUs/About.tsx";
+import ContactUS from "./ContactUS/ContactUS.tsx";
 
 
 const Home = () => {
@@ -15,6 +17,8 @@ const Home = () => {
                 <Header/>
                 <Main/>
                 <RoomsPage/>
+                <ContactUS/>
+                <AboutUs/>
                 <Footer/>
             </TabLayout>
         </AuthLayout>

@@ -1,0 +1,182 @@
+﻿/* AboutUs.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Segoe+UI:wght@400;600&display=swap');
+
+.container {
+    width: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    background-color: #fff;
+}
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 5rem;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Darkens image for text readability */
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    padding: 0 1rem;
+}
+
+.heroTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* --- Main Content Section --- */
+.mainContent {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: flex-start;
+}
+
+/* Left Column: Manager Image */
+.imageColumn {
+    flex: 0 0 350px; /* Fixed width for image column */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imageWrapper {
+    position: relative;
+    padding-top: 20px;
+    padding-right: 20px;
+    margin-bottom: 1.5rem;
+}
+
+.decorativeBox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #8B7355; /* Brand Brown */
+    z-index: 0;
+    transform: translate(15px, -15px); /* Offsets the box */
+}
+
+.managerPhoto {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    z-index: 1;
+    display: block;
+}
+
+.managerName {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    color: #000;
+}
+
+/* Right Column: Text */
+.textColumn {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #444;
+    text-align: justify;
+}
+
+.textColumn p {
+    margin-bottom: 1.5rem;
+}
+
+/* --- Clients Section --- */
+.clientsSection {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 4rem;
+}
+
+.clientsTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.logoRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.clientLogo {
+    height: 40px;
+    width: auto;
+    opacity: 0.8;
+    filter: grayscale(100%); /* Makes logos look uniform */
+    transition: all 0.3s;
+}
+
+.clientLogo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .mainContent {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .imageColumn {
+        flex: auto;
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .decorativeBox {
+        transform: translate(10px, -10px);
+    }
+
+    .logoRow {
+        gap: 2rem;
+    }
+}
