@@ -1,0 +1,238 @@
+﻿import {
+    LayoutDashboard,
+    CalendarDays,
+    BedDouble,
+    Users,
+    Briefcase,
+    Search,
+    User,
+    MoreHorizontal,
+    Bed,
+    UserCheck,
+    DoorOpen
+} from 'lucide-react';
+import styles from './style/dashboard.module.css';
+import {useAdmin} from "../../context/AdminContext.tsx";
+
+const HotelDashboard = () => {
+    const {occupiedRooms, availableRooms, workers, guests} = useAdmin()
+    // Mock Data for Table
+    const staffData = [
+        {
+            id: 1,
+            name: "John Doe",
+            roleSub: "Receptionist",
+            role: "Receptionist",
+            status: "On Duty",
+            shift: "Morning",
+            tasks: "3 tasks",
+            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 2,
+            name: "Jane Smith",
+            roleSub: "Housekeeping",
+            role: "Housekeeping",
+            status: "Off Duty",
+            shift: "—",
+            tasks: "2 tasks",
+            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 3,
+            name: "Michael Brown",
+            roleSub: "Housekeeping",
+            role: "Housekeeping",
+            status: "On Duty",
+            shift: "Evening",
+            tasks: "1 task",
+            avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 4,
+            name: "Emily Davis",
+            roleSub: "Housekeeping",
+            role: "Housekeeping",
+            status: "On Leave",
+            shift: "—",
+            tasks: "0 tasks",
+            avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 5,
+            name: "Sarah Wilson",
+            roleSub: "Receptionist",
+            role: "Receptionist",
+            status: "On Leave",
+            shift: "—",
+            tasks: "0 tasks",
+            avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 6,
+            name: "James Smith",
+            roleSub: "Chef",
+            role: "Chef",
+            status: "On Duty",
+            shift: "Morning",
+            tasks: "2 tasks",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+        }
+    ];
+
+    const getStatusClass = (status:boolean) => {
+        switch (status) {
+            case true: return styles.statusOnDuty;
+            case false: return styles.statusOffDuty;
+            default: return '';
+        }
+    };
+
+    return (
+        <div className={styles.container}>
+
+            {/* Sidebar Navigation */}
+            <aside className={styles.sidebar}>
+                <div className={styles.sidebarHeader}>
+                    <LayoutDashboard size={24} color="#333" /> Dashboard
+                </div>
+
+                <nav className={styles.navMenu}>
+                    <a href="#" className={`${styles.navItem} ${styles.activeNavItem}`}>
+                        <LayoutDashboard size={18} /> Dashboard
+                    </a>
+                    <a href="#" className={styles.navItem}>
+                        <CalendarDays size={18} /> Reservations
+                    </a>
+                    <a href="#" className={styles.navItem}>
+                        <BedDouble size={18} /> Rooms
+                    </a>
+                    <a href="#" className={styles.navItem}>
+                        <Users size={18} /> Guests
+                    </a>
+                    <a href="#" className={styles.navItem}>
+                        <Briefcase size={18} /> Staff
+                    </a>
+
+                </nav>
+
+
+            </aside>
+
+            {/* Main Content */}
+            <main className={styles.mainContent}>
+
+                {/* Hotel Overview Section */}
+                <h2 className={styles.sectionTitle}>Hotel Overview</h2>
+
+                <div className={styles.topStatsRow}>
+
+                    <div className={`${styles.statCard} ${styles.redStat}`}>
+                        <div className={styles.iconBox}><Bed size={24} /></div>
+                        <div className={styles.statInfo}>
+                            <span className={styles.statNumber}>{occupiedRooms}</span>
+                            <span className={styles.statLabel}>Occupied Rooms</span>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.statCard} ${styles.greenStat}`}>
+                        <div className={styles.iconBox}><DoorOpen size={24} /></div>
+                        <div className={styles.statInfo}>
+                            <span className={styles.statNumber}>{availableRooms}</span>
+                            <span className={styles.statLabel}>Available Rooms</span>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.statCard} ${styles.blueStat}`}>
+                        <div className={styles.iconBox}><Briefcase size={24} /></div>
+                        <div className={styles.statInfo}>
+                            <span className={styles.statNumber}>{workers?.length}</span>
+                            <span className={styles.statLabel}>Workers</span>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.statCard} ${styles.purpleStat}`}>
+                        <div className={styles.iconBox}><Users size={24} /></div>
+                        <div className={styles.statInfo}>
+                            <span className={styles.statNumber}>{guests?.length}</span>
+                            <span className={styles.statLabel}>Guests</span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                {/* Staff Overview Sub-header & Stats */}
+                <h3 className={styles.subTitle}>Staff Overview</h3>
+
+                <div className={styles.middleStatsRow}>
+                    <div className={styles.midCard}>
+                        <Users size={32} className={styles.midIcon} />
+                        <div className={styles.statInfo}>
+                            <span className={styles.midNumber}>{workers.length}</span>
+                            <span className={styles.statLabel}>Active Staff</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.midCard}>
+                        <UserCheck size={32} className={styles.midIcon} />
+                        <div className={styles.statInfo}>
+                            <span className={styles.midNumber}>{workers.filter(worker=>worker.onDuty).length}</span>
+                            <span className={styles.statLabel}>On Duty</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Staff Table */}
+                <div className={styles.tableContainer}>
+                    <div className={styles.tableHeader}>
+                        <h4 className={styles.tableTitle}>Staff Overview</h4>
+
+                    </div>
+
+                    <table className={styles.table}>
+                        <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Status</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {workers.map((staff) => (
+                            <tr key={staff.id}>
+                                <td>
+                                    <img src={staff.avatarUser?.avatarPath} alt={staff.name} className={styles.avatar} />
+                                </td>
+                                <td>
+                                    <div className={styles.userInfo}>
+                                        <span className={styles.userName}>{staff.name}</span>
+                                        <span className={styles.userRoleSub}>{staff.position}</span>
+                                    </div>
+                                </td>
+                                <td>{staff.position}</td>
+
+                                <td>
+                    <span className={`${styles.badge} ${getStatusClass(staff.onDuty)}`}>
+                        {staff.onDuty?"On Duty":"Off Duty"}
+                    </span>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </main>
+        </div>
+    );
+};
+
+export default HotelDashboard;

@@ -15,16 +15,19 @@ interface AvatarType {
     public_id:string,
     avatarPath:string
 }
-interface User {
+export interface User {
     id:string,
     name:string,
+    onDuty:boolean,
     avatarUser:AvatarType,
+    position:string,
     email:string,
     reservations:never[]
 }
 
 interface contextPropsType  {
     isLogged:boolean,
+    roles:string[],
     user:User|null,
     registration:(FormData:FormData)=>Promise<void>|string
     login:(FormData:FormData)=>Promise<void>|string;
@@ -39,6 +42,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
     const api_url = import.meta.env.VITE_API_URL
     const navigate = useNavigate();
     const [isLogged, setIsLogged] = useState(false);
+    const [roles, setRoles] = useState<string[]>([])
     const [user, setUser] = useState<User|null>(null);
     const registration = async (formData:FormData) => {
         const password = formData.get("password")
@@ -114,6 +118,8 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
                     if(response.status==200){
                         const data = response.data;
                         setUser(data.user);
+                        setRoles(data.roles)
+
                         console.log(user)
                         setIsLogged(true)
                     }
@@ -130,7 +136,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
     },[])
 
     return(
-        <AuthContext.Provider value={{ isLogged, user, registration,login, logout }}>
+        <AuthContext.Provider value={{ isLogged,roles ,user, registration,login, logout }}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,4 +1,4 @@
-﻿import{ useState } from 'react';
+﻿import {type ChangeEvent, useState} from 'react';
 import { MapPin } from 'lucide-react';
 import styles from './contact.module.css';
 import {useTab} from "../../context/TabContext.tsx";
@@ -10,7 +10,7 @@ const ContactUs = () => {
         message: ''
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -89,9 +89,10 @@ const ContactUs = () => {
                     // In a real app, replace src with a real map embed or API image
                     // using a placeholder image that looks like a map for now:
                     onError={(e) => {
-                        e.target.src = "https://maps.googleapis.com/maps/api/staticmap?center=Coyoacan&zoom=14&size=1000x400&sensor=false&key=YOUR_API_KEY_HERE_IF_AVAILABLE"
+                        const target = e.target as HTMLImageElement
+                        target.src = "https://maps.googleapis.com/maps/api/staticmap?center=Coyoacan&zoom=14&size=1000x400&sensor=false&key=YOUR_API_KEY_HERE_IF_AVAILABLE"
                         // Or simpler:
-                        e.target.style.backgroundColor = "#e5e3df"; // fallback color
+                        target.style.backgroundColor = "#e5e3df"; // fallback color
                     }}
                 />
                 {/* Simulating the pin from the screenshot */}

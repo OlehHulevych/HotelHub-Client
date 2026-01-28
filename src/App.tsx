@@ -5,6 +5,8 @@ import Authorization from "../Components/Authorization/Authorization.tsx";
 import Profile from "../Components/Profile/Profile.Component.tsx";
 import UserLayout from "../context/UserContext.tsx";
 import {AuthLayout} from "../context/AuthContext.tsx";
+import HotelDashboard from "../Components/Admin/Dashboard.tsx";
+import {AdminLayout} from "../context/AdminContext.tsx";
 
 function App() {
     return (
@@ -12,6 +14,13 @@ function App() {
            <Route path="/" element={<Home />}/>
            <Route path= "/authorize" element={<Authorization/>}/>
            <Route path= "/authorize" element={<Authorization/>}/>
+           <Route path = "/admin" element={
+               <AuthLayout>
+                   <AdminLayout>
+                       <HotelDashboard/>
+                   </AdminLayout>
+               </AuthLayout>
+           }/>
            <Route path = "/profile" element={
                <AuthLayout>
                    <UserLayout>
