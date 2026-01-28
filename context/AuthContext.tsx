@@ -120,7 +120,7 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
                         setUser(data.user);
                         setRoles(data.roles)
 
-                        console.log(user)
+
                         setIsLogged(true)
                     }
                 }

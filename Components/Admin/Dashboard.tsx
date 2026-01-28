@@ -4,9 +4,6 @@
     BedDouble,
     Users,
     Briefcase,
-    Search,
-    User,
-    MoreHorizontal,
     Bed,
     UserCheck,
     DoorOpen
@@ -17,68 +14,7 @@ import {useAdmin} from "../../context/AdminContext.tsx";
 const HotelDashboard = () => {
     const {occupiedRooms, availableRooms, workers, guests} = useAdmin()
     // Mock Data for Table
-    const staffData = [
-        {
-            id: 1,
-            name: "John Doe",
-            roleSub: "Receptionist",
-            role: "Receptionist",
-            status: "On Duty",
-            shift: "Morning",
-            tasks: "3 tasks",
-            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 2,
-            name: "Jane Smith",
-            roleSub: "Housekeeping",
-            role: "Housekeeping",
-            status: "Off Duty",
-            shift: "—",
-            tasks: "2 tasks",
-            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 3,
-            name: "Michael Brown",
-            roleSub: "Housekeeping",
-            role: "Housekeeping",
-            status: "On Duty",
-            shift: "Evening",
-            tasks: "1 task",
-            avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 4,
-            name: "Emily Davis",
-            roleSub: "Housekeeping",
-            role: "Housekeeping",
-            status: "On Leave",
-            shift: "—",
-            tasks: "0 tasks",
-            avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 5,
-            name: "Sarah Wilson",
-            roleSub: "Receptionist",
-            role: "Receptionist",
-            status: "On Leave",
-            shift: "—",
-            tasks: "0 tasks",
-            avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 6,
-            name: "James Smith",
-            roleSub: "Chef",
-            role: "Chef",
-            status: "On Duty",
-            shift: "Morning",
-            tasks: "2 tasks",
-            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-        }
-    ];
+
 
     const getStatusClass = (status:boolean) => {
         switch (status) {

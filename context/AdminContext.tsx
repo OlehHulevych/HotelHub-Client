@@ -1,6 +1,7 @@
 ﻿import {createContext, useState, useContext, useEffect, type ReactNode} from "react"
-import {useAuth, User} from "./AuthContext";
-import {Reservation, Room} from "../types";
+import {useNavigate} from "react-router";
+import {useAuth, type User} from "./AuthContext";
+import {type Reservation, type Room} from "../types";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -16,6 +17,7 @@ interface contextProps {
 const AdminContext = createContext<contextProps|undefined>(undefined)
 
 export const AdminLayout = ({children}:{children:ReactNode}) => {
+    const navigate = useNavigate();
     const api_url = import.meta.env.VITE_API_URL
     const [guests,setGuests] = useState<User[]>([])
     const [workers, setWorkers] = useState<User[]>([])
@@ -26,22 +28,32 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
     const {roles} = useAuth();
 
     useEffect(() => {
+        const controller = new AbortController();
         const fetch = async () =>{
             let isAdmin = false
             const token = Cookies.get("token")
             for(const role of roles){
-                if(role=="ADMIN" || role=="OWNER"){
+                if(role==="ADMIN" || role==="OWNER"){
                     isAdmin = true;
                 }
             }
+            console.log(isAdmin)
             if(isAdmin && token!==null){
                 try{
-                    const response  = await axios.get(api_url+"/report",{
-                        headers:{
-                            "Content-Type":"application/json",
-                            Authorization:"Bearer "+token
-                        }
-                    })
+                    const [response,reservationResponse, roomResponse] = await Promise.all([
+                        axios.get(api_url+"/report",{
+                            headers: { Authorization: `Bearer ${token}` },
+                            signal: controller.signal
+                        }),
+                        axios.get(api_url+"/reservation",{
+                            headers:{Authorization:`Bearer ${token}`},
+                            signal:controller.signal
+                        }),
+                        axios.get(api_url+"/room", {
+                            headers:{Authorization:`Bearer ${token}`},
+                            signal:controller.signal
+                        })
+                    ])
                     if(response.status==200){
                         const {guests, workers, availableRooms, occupiedRooms} = response.data.item
                         setGuests(guests)
@@ -49,15 +61,32 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                         setOccupiedRooms(occupiedRooms)
                         setWorkers(workers)
                     }
+                    else{
+                        console.error("Error occurred: "+response)
+                    }
+                    if(reservationResponse.status==200){
+                        const {items} = reservationResponse.data
+                        setReservations(items);
+                    }
+                    if(roomResponse.status==200){
+                        const {items} = roomResponse.data
+                        setRooms(items)
+                    }
+
                 }
                 catch (error){
                     console.error("Error occurred "+error)
                 }
             }
+            else if(roles.length > 0){
+                navigate("/authorize?type=login");
+            }
         }
         fetch();
 
-    }, [api_url, roles]);
+    }, [api_url, roles])
+
+
 
     return(
         <AdminContext.Provider value={{guests, availableRooms, occupiedRooms ,workers,reservations, rooms}}>
