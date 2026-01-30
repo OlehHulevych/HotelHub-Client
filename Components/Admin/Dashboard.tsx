@@ -9,10 +9,12 @@
     DoorOpen
 } from 'lucide-react';
 import styles from './style/dashboard.module.css';
-import {useAdmin} from "../../context/AdminContext.tsx";
+import {AdminTabs, useAdmin} from "../../context/AdminContext.tsx";
+import Reservations from "./Reservations.tsx";
+import UserLayout from "../../context/UserContext.tsx";
 
 const HotelDashboard = () => {
-    const {occupiedRooms, availableRooms, workers, guests} = useAdmin()
+    const {occupiedRooms, availableRooms, workers, guests, setTab, tab} = useAdmin()
     // Mock Data for Table
 
 
@@ -34,13 +36,13 @@ const HotelDashboard = () => {
                 </div>
 
                 <nav className={styles.navMenu}>
-                    <a href="#" className={`${styles.navItem} ${styles.activeNavItem}`}>
+                    <a href="#" onClick={()=>setTab(AdminTabs.Dashboard)} className={`${styles.navItem} ${tab===AdminTabs.Dashboard && styles.activeNavItem}`}>
                         <LayoutDashboard size={18} /> Dashboard
                     </a>
-                    <a href="#" className={styles.navItem}>
+                    <a href="#" onClick={()=>setTab(AdminTabs.Reservations)} className={`${styles.navItem} ${tab===AdminTabs.Reservations && styles.activeNavItem}`}>
                         <CalendarDays size={18} /> Reservations
                     </a>
-                    <a href="#" className={styles.navItem}>
+                    <a href="#" onClick={()=>setTab(AdminTabs.Rooms)} className={`${styles.navItem} ${tab===AdminTabs.Rooms && styles.activeNavItem}`}>
                         <BedDouble size={18} /> Rooms
                     </a>
                     <a href="#" className={styles.navItem}>
@@ -56,7 +58,7 @@ const HotelDashboard = () => {
             </aside>
 
             {/* Main Content */}
-            <main className={styles.mainContent}>
+            {tab===AdminTabs.Dashboard && (<main className={styles.mainContent}>
 
                 {/* Hotel Overview Section */}
                 <h2 className={styles.sectionTitle}>Hotel Overview</h2>
@@ -166,7 +168,10 @@ const HotelDashboard = () => {
 
 
 
-            </main>
+            </main>)}
+            {tab===AdminTabs.Reservations && <UserLayout>
+                <Reservations/>
+            </UserLayout>}
         </div>
     );
 };

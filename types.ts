@@ -1,4 +1,6 @@
-﻿export interface RoomType {
+﻿import type {User} from "./context/AuthContext.tsx";
+
+export interface RoomType {
     id:string;
     name:string,
     description:string,
@@ -25,7 +27,7 @@ export interface Detail {
 
 export interface Room {
     Id:string,
-    Number:number,
+    number:number,
     RoomTypeId:string,
     type:RoomType
 }
@@ -33,7 +35,8 @@ export interface Room {
 export interface Reservation {
     id:string,
     checkInDate:Date,
-    checkOutDate:Date
+    checkOutDate:Date,
+    user:User,
     room:Room,
     status:Status,
     TotalPrice:number

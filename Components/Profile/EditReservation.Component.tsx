@@ -4,10 +4,11 @@ import styles from './styles/edit.module.css';
 import Cookies from "js-cookie";
 import axios from "axios";
 import {useInfo} from "../../context/UserContext.tsx";
+import {useAdmin} from "../../context/AdminContext.tsx";
 
 const EditComponent = ({ isOpen, onClose, initialStart, initialEnd, reservationId }:{isOpen:boolean, onClose:()=>void, initialStart:Date|null, initialEnd:Date|null, reservationId:string|null}) => {
 
-
+    const {setReload, reload} = useAdmin()
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const {setEdited} = useInfo();
@@ -49,6 +50,7 @@ const EditComponent = ({ isOpen, onClose, initialStart, initialEnd, reservationI
             })
             if(response.status==200){
                 setEdited(true)
+                setReload(reload+1)
                 onClose();
             }
             else{

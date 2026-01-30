@@ -1,0 +1,248 @@
+﻿/* Reservations.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.container {
+    width: 100%;
+    padding: 2rem 3rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F8F9FA;
+    min-height: 100vh;
+    color: #444;
+}
+
+.pageTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Filter Tabs --- */
+.tabsContainer {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    background-color: #F0F0F0;
+    color: #666;
+}
+
+.activeTab {
+    background-color: #E8DCC6; /* Beige/Gold active state */
+    color: #5D4037;
+}
+
+.count {
+    font-weight: 600;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* --- Main Card --- */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    padding: 1.5rem;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+    margin: 0;
+}
+
+.searchWrapper {
+    position: relative;
+    width: 250px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 10px 10px 38px;
+    border: 1px solid #EEE;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    outline: none;
+    background-color: #FAFAFA;
+}
+
+/* --- Table Styles --- */
+.tableContainer {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: 1rem;
+    background-color: #F9F9F9;
+    color: #777;
+    font-weight: 500;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.table td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid #F5F5F5;
+    color: #555;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+/* Status Badges */
+.badge {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    min-width: 90px;
+}
+
+.upcoming {
+    background-color: #E0F2F1;
+    color: #00897B;
+}
+
+.canceled {
+    background-color: #FFEBEE;
+    color: #E57373;
+}
+
+.checkedIn {
+    background-color: #ECEFF1;
+    color: #78909C;
+}
+
+/* Action Buttons */
+.actionGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.viewBtn {
+    background-color: #5D9CEC; /* Blue */
+}
+
+.cancelActionBtn {
+    background-color: #E57373; /* Red */
+}
+
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2rem;
+}
+
+.pageBtn {
+    border: 1px solid #EEE;
+    background-color: #fff;
+    color: #666;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.pageBtn:hover {
+    background-color: #F5F5F5;
+}
+
+.activePage {
+    background-color: #C1A68D; /* Brown active state */
+    color: white;
+    border-color: #C1A68D;
+}
+
+.activePage:hover {
+    background-color: #B0957C;
+}
+
+.navBtn {
+    padding: 0 16px;
+    width: auto;
+    font-weight: 500;
+    background-color: #F0F0F0;
+    border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    .tabsContainer {
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    .cardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .searchWrapper {
+        width: 100%;
+    }
+    .table td, .table th {
+        padding: 0.8rem;
+    }
+}
