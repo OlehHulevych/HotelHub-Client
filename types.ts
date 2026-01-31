@@ -26,7 +26,7 @@ export interface Detail {
 }
 
 export interface Room {
-    Id:string,
+    id:string,
     number:number,
     RoomTypeId:string,
     type:RoomType

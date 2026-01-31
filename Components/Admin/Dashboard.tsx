@@ -12,6 +12,7 @@ import styles from './style/dashboard.module.css';
 import {AdminTabs, useAdmin} from "../../context/AdminContext.tsx";
 import Reservations from "./Reservations.tsx";
 import UserLayout from "../../context/UserContext.tsx";
+import RoomsComponent from "./Rooms.Component.tsx";
 
 const HotelDashboard = () => {
     const {occupiedRooms, availableRooms, workers, guests, setTab, tab} = useAdmin()
@@ -172,6 +173,7 @@ const HotelDashboard = () => {
             {tab===AdminTabs.Reservations && <UserLayout>
                 <Reservations/>
             </UserLayout>}
+            {tab==AdminTabs.Rooms && <RoomsComponent/>}
         </div>
     );
 };

@@ -1,0 +1,256 @@
+﻿/* Rooms.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.container {
+    width: 100%;
+    padding: 2rem 3rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #FDFBF7; /* Very light warm background */
+    min-height: 100vh;
+    color: #555;
+}
+
+/* --- Filter Tabs --- */
+.tabsContainer {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    background-color: #F2EBE5; /* Light beige/pinkish tint */
+    color: #8C8279;
+}
+
+.activeTab {
+    background-color: #E8DCC6; /* Darker beige/gold active state */
+    color: #5D4037;
+    font-weight: 600;
+}
+
+.count {
+    font-weight: 600;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* --- Main Card --- */
+.card {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    padding: 1.5rem;
+    border: 1px solid #F0F0F0;
+}
+
+.cardHeader {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+tr{
+    width: 100%;
+}
+
+.cardTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #555;
+    margin: 0;
+}
+
+.searchWrapper {
+    position: relative;
+    width: 280px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #AAA;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #EEE;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    outline: none;
+    background-color: #FAFAFA;
+    color: #555;
+}
+
+/* --- Table Styles --- */
+.tableContainer {
+
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: 1rem;
+    background-color: #FAF8F6; /* Very light warm header */
+    color: #888;
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid #F5F5F5;
+    color: #555;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+/* Room Photo */
+.roomPhoto {
+    width: 60px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* Status Badges */
+.badge {
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    display: inline-block;
+    min-width: 100px;
+    color: #fff;
+}
+
+.vacant {
+    background-color: #84A98C; /* Muted Green */
+}
+
+.occupied {
+    background-color: #D68C8C; /* Muted Red/Pink */
+}
+
+.maintenance {
+    background-color: #E9C46A; /* Muted Yellow/Gold */
+    color: #555; /* Darker text for contrast on yellow */
+}
+
+/* Action Buttons */
+.actionGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.editBtn {
+    background-color: #F0F0F0;
+    color: #666;
+}
+
+.deleteBtn {
+    background-color: #F8E8E8;
+    color: #D68C8C;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2rem;
+}
+
+.pageBtn {
+    border: none;
+    background-color: transparent;
+    color: #666;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.pageBtn:hover {
+    background-color: #F0F0F0;
+}
+
+.activePage {
+    background-color: #C1A68D; /* Gold/Brown active state */
+    color: white;
+}
+
+.activePage:hover {
+    background-color: #B0957C;
+}
+
+.navBtn {
+    padding: 0 16px;
+    width: auto;
+    font-weight: 500;
+    background-color: #EFEFEF;
+    border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .tabsContainer {
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    .cardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .searchWrapper {
+        width: 100%;
+    }
+    .table td, .table th {
+        padding: 0.8rem;
+    }
+}

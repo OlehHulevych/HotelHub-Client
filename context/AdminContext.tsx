@@ -119,6 +119,7 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                     }
                     if(roomResponse.status==200){
                         const {items, totalPages} = roomResponse.data
+                        console.log(items)
                         setRooms(items)
                         setRoomMaxPages(totalPages)
 
