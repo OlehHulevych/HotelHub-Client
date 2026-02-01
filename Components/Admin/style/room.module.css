@@ -63,8 +63,21 @@
     align-items: center;
     margin-bottom: 1.5rem;
 }
-tr{
-    width: 100%;
+
+.createBtn {
+    background-color: #A68A75; /* Brand Brown matching the theme */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    box-shadow: 0 3px 6px rgba(166, 138, 117, 0.2);
 }
 
 .cardTitle {

@@ -1,35 +1,88 @@
 ﻿import { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import styles from './style/room.module.css';
 import {useAdmin} from "../../context/AdminContext.tsx";
+import CreateRoomComponent from "./CreateRoom.Component.tsx";
 
 const Rooms = () => {
-    const [activeTab, setActiveTab] = useState('All');
-    const {rooms} = useAdmin()
+    const [currentPage, setCurrentPage] = useState(1)
+    const {rooms, roomMaxPages, setRoomPage, roomLengths, setRoomStatus, roomStatus } = useAdmin()
+    const [openCreate, setOpenCreate] = useState<boolean>(false)
 
-    // Mock Data matching the "Rooms" screenshot
+    const changePage = (nextPage:number)=>{
+        setRoomPage(nextPage)
+        setCurrentPage(nextPage)
+    }
+
+
 
 
     const getStatusClass = (status:number) => {
         switch (status) {
             case 0: return styles.vacant;
-            case 1: return styles.occupied;
-            case 2: return styles.maintenance;
+            case 2: return styles.occupied;
+            case 1: return styles.maintenance;
             default: return '';
         }
     };
 
+    const getStatus = (status:number) => {
+        switch (status){
+            case 0: return "Free";
+            case 2: return "Occupied";
+            case 3: return "Maintenance";
+            default: return '';
+        }
+    }
+
     return (
+        <>
         <div className={styles.container}>
 
             {/* Filter Tabs */}
+            <div className={styles.tabsContainer}>
+                <button
+                    className={`${styles.tab} ${roomStatus === null ? styles.activeTab : ''}`}
+                    onClick={() => {
+                        setRoomStatus(null)
+                    }}
+                >
+                    All <span className={styles.count}>{roomLengths.totalRoomLength}</span>
+                </button>
+                <button
+                    className={`${styles.tab} ${roomStatus==0 ? styles.activeTab : ''}`}
+                    onClick={() =>{
+                        setRoomStatus(0)
+                    } }
+                >
+                    Free <span className={styles.count}>{roomLengths.freeRoomLength}</span>
+                </button>
+                <button
+                    className={`${styles.tab} ${roomStatus==2 ? styles.activeTab : ''}`}
+                    onClick={() => {
 
+                        setRoomStatus(2)
+                    }}
+                >
+                    Occupied <span className={styles.count}>{roomLengths.occupiedRoomLength}</span>
+                </button>
+                <button
+                    className={`${styles.tab} ${roomStatus==3 ? styles.activeTab : ''}`}
+                    onClick={() =>{
+                        setRoomStatus(3)
+                    } }
+                >
+                    Maintenance <span className={styles.count}>{roomLengths.maintenanceRoomLength}</span>
+                </button>
+            </div>
 
             {/* Main Table Card */}
             <div className={styles.card}>
                 <div className={styles.cardHeader}>
                     <h2 className={styles.cardTitle}>Rooms</h2>
-
+                    <button onClick={()=>setOpenCreate(true)} className={styles.createBtn}>
+                        <Plus size={18} /> Create Room
+                    </button>
                 </div>
 
                 <div className={styles.tableContainer}>
@@ -55,11 +108,11 @@ const Rooms = () => {
                                 <td>{room.type.name}</td>
                                 <td>{room.number}</td>
                                 <td>{room.type.detail.capacity}</td>
-                                <td>{room.type.pricePerNight}</td>
+                                <td>{room.type.pricePerNight}$</td>
                                 <td>{room.type.name}</td>
                                 <td>
                     <span className={`${styles.badge} ${getStatusClass(room.status)}`}>
-                      {room.status}
+                      {getStatus(room.status)}
                     </span>
                                 </td>
                                 <td>
@@ -76,17 +129,16 @@ const Rooms = () => {
 
                 {/* Pagination */}
                 <div className={styles.pagination}>
-                    <button className={`${styles.pageBtn} ${styles.navBtn}`}>Previous</button>
-                    <button className={`${styles.pageBtn} ${styles.activePage}`}>1</button>
-                    <button className={styles.pageBtn}>2</button>
-                    <button className={styles.pageBtn}>3</button>
-                    <span style={{ color: '#888', padding: '0 4px' }}>...</span>
-                    <span style={{ color: '#888', padding: '0 4px' }}>...</span>
-                    <button className={styles.pageBtn}>20</button>
-                    <button className={`${styles.pageBtn} ${styles.navBtn}`}>Next</button>
+                    <button disabled={currentPage==1} onClick={()=>changePage(currentPage-1)} className={`${styles.pageBtn} ${styles.navBtn}`}>Previous</button>
+                    {Array.from({length:roomMaxPages},(_,i=1)=>i+1).map((page)=>(
+                        <button onClick={()=>changePage(page)} className={`${styles.pageBtn} ${currentPage==page? styles.activePage:''}`}>{page}</button>
+                    ))}
+                    <button disabled={currentPage == roomMaxPages} onClick={()=>changePage(currentPage+1)} className={`${styles.pageBtn} ${styles.navBtn}`}>Next</button>
                 </div>
             </div>
         </div>
+            {openCreate && <CreateRoomComponent isOpen={openCreate} onClose={()=>setOpenCreate(false)}/>}
+        </>
     );
 };
 
