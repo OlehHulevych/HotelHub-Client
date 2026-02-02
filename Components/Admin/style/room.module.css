@@ -190,8 +190,8 @@
     transition: opacity 0.2s;
 }
 
-.editBtn {
-    background-color: #F0F0F0;
+.maintenanceBtn {
+    background-color: #fffc06;
     color: #666;
 }
 

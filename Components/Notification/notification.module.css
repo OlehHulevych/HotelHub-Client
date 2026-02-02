@@ -1,0 +1,55 @@
+﻿/* Notification.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+.toast {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%); /* Centers the toast horizontally */
+    z-index: 3000; /* Higher than modal to appear on top */
+    background-color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #F0F0F0;
+    font-family: 'Poppins', sans-serif;
+    min-width: 320px;
+
+    /* Animation for sliding in from top */
+    animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.iconWrapper {
+    width: 24px;
+    height: 24px;
+    background-color: #88C093; /* Muted Green from screenshot */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.message {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Slide Down Animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}

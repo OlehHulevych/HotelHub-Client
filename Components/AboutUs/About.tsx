@@ -8,7 +8,6 @@ const AboutUs = () => {
     return (
         <div className={styles.container}>
 
-            {/* Hero Section */}
             <section className={styles.hero}>
                 <div className={styles.heroOverlay}></div>
                 <div className={styles.heroContent}>
@@ -21,10 +20,8 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            {/* Main Content: Manager & Description */}
             <section className={styles.mainContent}>
 
-                {/* Left: Image with Offset Background */}
                 <div className={styles.imageColumn}>
                     <div className={styles.imageWrapper}>
                         <div className={styles.decorativeBox}></div>
@@ -37,7 +34,6 @@ const AboutUs = () => {
                     <h3 className={styles.managerName}>Chidinma James (Manager)</h3>
                 </div>
 
-                {/* Right: Text Content */}
                 <div className={styles.textColumn}>
                     <p>
                         HotelHub is an international hospitality organization founded in 1945. Currently made up of 193 Member States, the PV and its work are guided by the purposes and principles contained in its founding Charter.
@@ -57,16 +53,7 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            {/* Clients Section */}
-            <section className={styles.clientsSection}>
-                <h2 className={styles.clientsTitle}>Clients</h2>
-                <div className={styles.logoRow}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NNPC_Logo.svg/1200px-NNPC_Logo.svg.png" alt="NNPC" className={styles.clientLogo} />
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Nigerian_Society_of_Engineers_Logo.svg/1200px-Nigerian_Society_of_Engineers_Logo.svg.png" alt="NSE" className={styles.clientLogo} />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/United_Nations_logo.svg/1200px-United_Nations_logo.svg.png" alt="UN" className={styles.clientLogo} />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_of_the_Central_Bank_of_Nigeria.svg/1200px-Logo_of_the_Central_Bank_of_Nigeria.svg.png" alt="CBN" className={styles.clientLogo} />
-                </div>
-            </section>
+
 
         </div>
     );

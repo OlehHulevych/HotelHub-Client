@@ -3,15 +3,68 @@ import { Plus } from 'lucide-react';
 import styles from './style/room.module.css';
 import {useAdmin} from "../../context/AdminContext.tsx";
 import CreateRoomComponent from "./CreateRoom.Component.tsx";
+import axios from "axios";
+import Cookies from "js-cookie";
+import Notification from "../Notification/Notification.Component.tsx";
 
 const Rooms = () => {
     const [currentPage, setCurrentPage] = useState(1)
-    const {rooms, roomMaxPages, setRoomPage, roomLengths, setRoomStatus, roomStatus } = useAdmin()
+    const {rooms, roomMaxPages, setRoomPage, roomLengths, setRoomStatus, roomStatus, setReload, reload } = useAdmin()
     const [openCreate, setOpenCreate] = useState<boolean>(false)
+    const [notification, setNotification] = useState<string|null>(null)
+
 
     const changePage = (nextPage:number)=>{
         setRoomPage(nextPage)
         setCurrentPage(nextPage)
+    }
+
+    const putInMaitenanceHandler = async (id:string) => {
+        try{
+            const token = Cookies.get("token");
+            const response = await axios.patch(import.meta.env.VITE_API_URL+ `/room?id=${id}`,{}, {
+                headers:{
+                    "Content-Type":"application/json",
+                     Authorization:`Bearer ${token}`
+
+                }
+            });
+            if(response.status==200){
+                const {message} = response.data;
+                setNotification(message)
+                setReload(reload+1)
+            }
+            else{
+                const {message} = response.data
+                setNotification(message)
+            }
+
+
+        }
+        catch (error){
+            console.error("Error occurred "+error);
+
+        }
+    }
+
+    const deleteHandler = async(id:string) => {
+        const token = Cookies.get("token");
+        try {
+            const response = await axios.delete(import.meta.env.VITE_API_URL + `/room?id=${id}`, {
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization:`Bearer ${token}`
+                }
+            })
+            if(response.status==200){
+                const {message} = response.data
+                setNotification(message)
+                setReload(reload+1)
+            }
+        }
+        catch (error){
+            console.error("Error occurred "+error)
+        }
     }
 
 
@@ -21,7 +74,7 @@ const Rooms = () => {
         switch (status) {
             case 0: return styles.vacant;
             case 2: return styles.occupied;
-            case 1: return styles.maintenance;
+            case 3: return styles.maintenance;
             default: return '';
         }
     };
@@ -117,8 +170,8 @@ const Rooms = () => {
                                 </td>
                                 <td>
                                     <div className={styles.actionGroup}>
-                                        <button className={`${styles.btn} ${styles.editBtn}`}>Edit</button>
-                                        <button className={`${styles.btn} ${styles.deleteBtn}`}>Delete</button>
+                                        <button onClick={()=>putInMaitenanceHandler(room.id)} className={`${styles.btn} ${styles.maintenanceBtn}`}>Put in Maintenance</button>
+                                        <button onClick={()=>deleteHandler(room.id)} className={`${styles.btn} ${styles.deleteBtn}`}>Delete</button>
                                     </div>
                                 </td>
                             </tr>
@@ -138,6 +191,7 @@ const Rooms = () => {
             </div>
         </div>
             {openCreate && <CreateRoomComponent isOpen={openCreate} onClose={()=>setOpenCreate(false)}/>}
+            {notification && <Notification message={notification} onClose={()=>setNotification(null)} />}
         </>
     );
 };
