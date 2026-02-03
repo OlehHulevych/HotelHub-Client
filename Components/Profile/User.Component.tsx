@@ -17,7 +17,7 @@ const UserProfile = () => {
 
     // State for the profile image preview
     const [avatarPreview, setAvatarPreview] = useState(
-        user?.avatarUser.avatarPath
+        user?.photo
     );
 
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {

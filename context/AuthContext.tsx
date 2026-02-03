@@ -9,20 +9,15 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 import {useNavigate} from "react-router";
 
-interface AvatarType {
-    id:string,
-    userId:string,
-    public_id:string,
-    avatarPath:string
-}
+
 export interface User {
     id:string,
     name:string,
     onDuty:boolean,
-    avatarUser:AvatarType,
-    position:string,
+    photo:string,
+    position?:string,
     email:string,
-    reservations:never[]
+
 }
 
 interface contextPropsType  {

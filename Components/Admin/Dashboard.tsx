@@ -47,9 +47,6 @@ const HotelDashboard = () => {
                         <BedDouble size={18} /> Rooms
                     </a>
                     <a href="#" className={styles.navItem}>
-                        <Users size={18} /> Guests
-                    </a>
-                    <a href="#" className={styles.navItem}>
                         <Briefcase size={18} /> Staff
                     </a>
 
@@ -146,7 +143,7 @@ const HotelDashboard = () => {
                         {workers.map((staff) => (
                             <tr key={staff.id}>
                                 <td>
-                                    <img src={staff.avatarUser?.avatarPath} alt={staff.name} className={styles.avatar} />
+                                    <img src={staff.photo} alt={staff.name} className={styles.avatar} />
                                 </td>
                                 <td>
                                     <div className={styles.userInfo}>

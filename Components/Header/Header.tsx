@@ -22,7 +22,7 @@ const Header = () => {
                 <div className={style.button_block}>
                     {user!=null?(
                         <Link to={"/profile"}>
-                            <img className={style.avatar} src={user.avatarUser.avatarPath} alt=""/>
+                            <img className={style.avatar} src={user.photo} alt=""/>
                         </Link>
                     ):(<button className={style.login_button}><Link to="/authorize?type=login">Log in</Link></button>)}
 
