@@ -72,7 +72,7 @@ const RoomListing = () => {
                         {/* Image Area */}
                         <div className={styles.imageWrapper}>
                             <img
-                                src={room.photos[0].uri}
+                                src={room.photos[0]}
                                 alt={room.name}
                                 className={styles.image}
                             />

@@ -1,7 +1,7 @@
 ﻿import {createContext, useState, useContext, useEffect, type ReactNode, type Dispatch, type SetStateAction} from "react"
 import {useNavigate} from "react-router";
 import {useAuth, type User} from "./AuthContext";
-import {type Reservation, type Room} from "../types";
+import { type ReservationAdmin, type Room} from "../types";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -24,6 +24,10 @@ interface contextProps {
     reload:number,
     setReload:Dispatch<SetStateAction<number>>,
     guests:User[]
+    staff:User[]
+    pageStaff:number,
+    setPageStaff:Dispatch<SetStateAction<number>>
+    maxPageStaff:number
     tab:string,
     lengths:lengthType,
     roomPage:number,
@@ -36,7 +40,7 @@ interface contextProps {
     availableRooms:number,
     occupiedRooms:number,
     workers:User[],
-    reservations:Reservation[],
+    reservations:ReservationAdmin[],
     rooms:Room[],
     roomLengths:roomLengthType,
     roomStatus:number|null,
@@ -69,6 +73,9 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
     })
 
     const [status, setStatus] = useState<string|null>(null)
+    const [staff, setStaff] = useState<User[]>([])
+    const [pageStaff, setPageStaff] = useState<number>(1)
+    const [maxPageStaff,setMaxPageStaff ] = useState<number>(1)
     const [reload,setReload] = useState<number>(0)
     const api_url = import.meta.env.VITE_API_URL
     const [guests,setGuests] = useState<User[]>([])
@@ -76,7 +83,7 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
     const [roomPage,setRoomPage] = useState<number>(1)
     const [roomMaxPages, setRoomMaxPages] = useState<number>(1)
     const [reservationMaxPages, setReservationMaxPages] = useState<number>(1)
-    const [reservations, setReservations] = useState<Reservation[]>([])
+    const [reservations, setReservations] = useState<ReservationAdmin[]>([])
     const [availableRooms,setAvailableRooms] = useState<number>(0)
     const [occupiedRooms, setOccupiedRooms] = useState<number>(0)
     const [rooms, setRooms] = useState<Room[]>([])
@@ -98,7 +105,7 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
             console.log(isAdmin)
             if(isAdmin && token!==null){
                 try{
-                    const [response,reservationResponse, roomResponse] = await Promise.all([
+                    const [response,reservationResponse, roomResponse, staffResponse] = await Promise.all([
                         axios.get(api_url+"/report",{
                             headers: { Authorization: `Bearer ${token}` },
                             signal: controller.signal
@@ -108,6 +115,10 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                             signal:controller.signal
                         }),
                         axios.get(api_url+`/room?currentPage=${roomPage}${roomStatus==null?"":`&roomStatus=${roomStatus}`}`, {
+                            headers:{Authorization:`Bearer ${token}`},
+                            signal:controller.signal
+                        }),
+                        axios.get(api_url + `/user/All?currentPage=${pageStaff}`,{
                             headers:{Authorization:`Bearer ${token}`},
                             signal:controller.signal
                         })
@@ -149,7 +160,13 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                         })
 
                     }
+                    if(staffResponse.status==200){
+                        const {items, currentPage, totalPage} = staffResponse.data;
+                        setStaff(items)
+                        setPageStaff(currentPage)
+                        setMaxPageStaff(totalPage)
 
+                    }
                 }
                 catch (error){
                     console.error("Error occurred "+error)
@@ -161,12 +178,12 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
         }
         fetch();
 
-    }, [api_url, roles ,reservationPage,roomPage, reload,status, roomStatus])
+    }, [api_url, roles ,reservationPage,roomPage, reload,status, roomStatus, pageStaff])
 
 
 
     return(
-        <AdminContext.Provider value={{guests, availableRooms, occupiedRooms ,workers,reservations, rooms, tab,setTab,roomPage, setRoomPage, reservationPage, setReservationPage, reservationMaxPages, roomMaxPages, reload, setReload, lengths, setStatus, status, roomLengths,setRoomStatus, roomStatus}}>
+        <AdminContext.Provider value={{guests, availableRooms, occupiedRooms ,workers,reservations, rooms, tab,setTab,roomPage, setRoomPage, reservationPage, setReservationPage, reservationMaxPages, roomMaxPages, reload, setReload, lengths, setStatus, status, roomLengths,setRoomStatus, roomStatus, staff,maxPageStaff, setPageStaff, pageStaff  }}>
             {children}
         </AdminContext.Provider>
     )

@@ -76,7 +76,7 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string}) => {
                             {roomType.photos.map((src, index) => (
                                 <div key={index} className={styles.slide}>
                                     <img
-                                        src={src.uri}
+                                        src={src}
                                         alt={`Room view ${index + 1}`}
                                         className={styles.roomImage}
                                     />
@@ -149,23 +149,23 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string}) => {
                             <Users className={styles.highlightIcon} size={20} />
                             <div className={styles.highlightText}>
                                 <h4>Capacity</h4>
-                                <p>{roomType.detail.capacity}</p>
+                                <p>{roomType.capacity}</p>
                             </div>
                         </div>
                         <div className={styles.highlightItem}>
                             <ShowerHead className={styles.highlightIcon} size={20} />
                             <div className={styles.highlightText}>
                                 <h4>Bathroom</h4>
-                                {roomType.detail.spa.map((item:string)=>(
+                                {roomType.spa.map((item:string)=>(
                                     <p>{item}</p>
                                 ))}
                             </div>
                         </div>
-                        {roomType.detail.view.length>0 ?<div className={styles.highlightItem}>
+                        {roomType.view.length>0 ?<div className={styles.highlightItem}>
                             <Eye className={styles.highlightIcon} size={20} />
                             <div className={styles.highlightText}>
                                 <h4>View</h4>
-                                {roomType.detail.view.map((item:string)=>(
+                                {roomType.view.map((item:string)=>(
                                     <p>{item}</p>
                                 ))}
                             </div>
@@ -175,7 +175,7 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string}) => {
                             <Coffee className={styles.highlightIcon} size={20} />
                             <div className={styles.highlightText}>
                                 <h4>Nourishment</h4>
-                                {roomType.detail.norishment.map((item:string)=>(
+                                {roomType.norishment.map((item:string)=>(
                                     <p>{item}</p>
                                 ))}
                             </div>
@@ -183,7 +183,7 @@ const RoomDetails = ({ onClose, id }:{onClose:()=>void, id:string}) => {
                     </div>
                 </div>
             </div>:""}
-            {isBooking? <Reservation onClose={onClose} setNumber = {setNumber} setIsBooking = {setIsBooking} id={id} photo = {roomType?.photos[0].uri} price = {roomType?.pricePerNight} setConfirmation={setConfirmation}   />: "" }
+            {isBooking? <Reservation onClose={onClose} setNumber = {setNumber} setIsBooking = {setIsBooking} id={id} photo = {roomType?.photos[0]} price = {roomType?.pricePerNight} setConfirmation={setConfirmation}   />: "" }
             {!isBooking && confirmation ? <Confirmation room={roomType?.name} number={number} onClose = {onClose}  />:""}
         </div>
 

@@ -111,12 +111,12 @@ const MyReservations = () => {
                     <div  key={reservation.id} className={styles.card}>
 
                         <div className={styles.cardImageWrapper}>
-                            <img src={reservation.room.type?.photos[0].uri} alt={reservation.room.type?.name} className={styles.cardImage} />
+                            <img src={reservation.photos[0]} alt={reservation.typeName} className={styles.cardImage} />
                         </div>
 
                         <div className={styles.cardInfo}>
-                            <h3 className={styles.roomName}>{reservation.room.type?.name}</h3>
-                            <div className={styles.price}>{reservation.TotalPrice}</div>
+                            <h3 className={styles.roomName}>{reservation.typeName}</h3>
+                            <div className={styles.price}>{reservation.totalPrice}$</div>
 
                             <div className={styles.amenities}>
                                 <Tv size={16} className={styles.icon} />

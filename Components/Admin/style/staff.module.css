@@ -1,0 +1,236 @@
+﻿/* StaffList.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.container {
+    width: 100%;
+    padding: 2rem 3rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #FDFBF9; /* Warm off-white background */
+    min-height: 100vh;
+    color: #555;
+}
+
+/* --- Header --- */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #F0ECE9;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #555;
+    margin: 0;
+}
+
+.searchWrapper {
+    position: relative;
+    width: 300px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 14px 10px 40px;
+    border: 1px solid #EEE;
+    border-radius: 20px;
+    background-color: #F4F0ED;
+    outline: none;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* --- Table --- */
+.tableContainer {
+    overflow-x: auto;
+    background-color: transparent;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: 1rem;
+    font-weight: 500;
+    color: #777;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.table td {
+    padding: 1.2rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #F0F0F0;
+    color: #444;
+}
+
+/* Photo & Name Columns */
+.photo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #333;
+}
+
+.userJob {
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: 400;
+}
+
+.email {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Status Badges */
+.badge {
+    padding: 6px 18px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+}
+
+.onDuty {
+    background-color: #9AB8A8; /* Muted Green */
+    color: white;
+}
+
+.offDuty {
+    background-color: #DBCABF; /* Beige */
+    color: #5D4037;
+}
+
+.onLeave {
+    background-color: #BFA588; /* Brown */
+    color: white;
+}
+
+.plainText {
+    color: #444;
+    font-size: 0.95rem;
+}
+
+/* Actions Buttons */
+.actionGroup {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    min-width: 80px;
+}
+
+.promoteBtn {
+    background-color: #6C8CBF; /* Blue from screenshot */
+    color: white;
+}
+
+.banBtn {
+    background-color: #EBCBCB; /* Light Red/Pink from screenshot */
+    color: #A85A5A; /* Darker Red text */
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3rem;
+}
+
+.pageBtn {
+    border: none;
+    background-color: transparent;
+    color: #666;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.pageBtn:hover {
+    background-color: #EAEAEA;
+}
+
+.activePage {
+    background-color: #A68A75; /* Brand Brown */
+    color: white;
+}
+
+.activePage:hover {
+    background-color: #8F7663;
+}
+
+.navBtn {
+    width: auto;
+    padding: 0 16px;
+    background-color: #EAEAEA;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .searchWrapper {
+        width: 100%;
+    }
+    .table td, .table th {
+        padding: 0.8rem;
+        white-space: nowrap;
+    }
+}

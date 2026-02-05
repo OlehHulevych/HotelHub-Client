@@ -13,6 +13,7 @@ import {AdminTabs, useAdmin} from "../../context/AdminContext.tsx";
 import Reservations from "./Reservations.tsx";
 import UserLayout from "../../context/UserContext.tsx";
 import RoomsComponent from "./Rooms.Component.tsx";
+import StaffComponent from "./Staff.Component.tsx";
 
 const HotelDashboard = () => {
     const {occupiedRooms, availableRooms, workers, guests, setTab, tab} = useAdmin()
@@ -46,7 +47,7 @@ const HotelDashboard = () => {
                     <a href="#" onClick={()=>setTab(AdminTabs.Rooms)} className={`${styles.navItem} ${tab===AdminTabs.Rooms && styles.activeNavItem}`}>
                         <BedDouble size={18} /> Rooms
                     </a>
-                    <a href="#" className={styles.navItem}>
+                    <a href="#" onClick={()=>setTab(AdminTabs.staff)} className={styles.navItem}>
                         <Briefcase size={18} /> Staff
                     </a>
 
@@ -171,6 +172,7 @@ const HotelDashboard = () => {
                 <Reservations/>
             </UserLayout>}
             {tab==AdminTabs.Rooms && <RoomsComponent/>}
+            {tab==AdminTabs.staff && <StaffComponent/>}
         </div>
     );
 };

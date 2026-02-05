@@ -113,8 +113,8 @@ const Reservations = () => {
                         <tbody>
                         {reservations.map((row) => (
                             <tr key={row.id}>
-                                <td>{row.user.name}</td>
-                                <td>{row.room.number}</td>
+                                <td>{row.guestName}</td>
+                                <td>{row.number}</td>
                                 <td>
                     <span className={`${styles.badge} ${getStatusStyle(row.status)}`}>
                       {row.status}
@@ -124,7 +124,7 @@ const Reservations = () => {
                                 <td>{formatDate(row.checkOutDate)}</td>
                                 <td>
                                     <div className={styles.actionGroup}>
-                                        <button onClick={()=>editHandler(row.id, row.checkInDate, row.checkOutDate)} className={`${styles.btn} ${styles.viewBtn}`}>Edit</button>
+                                        <button onClick={()=>editHandler(row.id,row.checkInDate, row.checkOutDate)} className={`${styles.btn} ${styles.viewBtn}`}>Edit</button>
                                         <button onClick={()=>cancelReservationHandler(row.id)} className={`${styles.btn} ${styles.cancelActionBtn}`}>Cancel</button>
                                     </div>
                                 </td>

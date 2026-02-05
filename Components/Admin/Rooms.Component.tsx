@@ -156,13 +156,13 @@ const Rooms = () => {
                         {rooms?.map((room) => (
                             <tr key={room.id}>
                                 <td>
-                                    <img src={room.type.photos[0].uri} alt={room.type.name} className={styles.roomPhoto} />
+                                    <img src={room.photo} alt={room.name} className={styles.roomPhoto} />
                                 </td>
-                                <td>{room.type.name}</td>
+                                <td>{room.name}</td>
                                 <td>{room.number}</td>
-                                <td>{room.type.detail.capacity}</td>
-                                <td>{room.type.pricePerNight}$</td>
-                                <td>{room.type.name}</td>
+                                <td>{room.capacity}</td>
+                                <td>{room.pricePerNight}$</td>
+                                <td>{room.name}</td>
                                 <td>
                     <span className={`${styles.badge} ${getStatusClass(room.status)}`}>
                       {getStatus(room.status)}

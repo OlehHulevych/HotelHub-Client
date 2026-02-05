@@ -1,46 +1,45 @@
-﻿import type {User} from "./context/AuthContext.tsx";
-
+﻿
 export interface RoomType {
-    id:string;
-    name:string,
-    description:string,
-    pricePerNight:number,
-    detail:Detail,
-    photos:RoomPhoto[]
-}
-
-export interface RoomPhoto {
-    id:string;
-    public_id:string
-    uri:string,
-}
-
-export interface Detail {
     id:string,
+    name:string,
+    pricePerNight:number,
+    description:string,
     norishment:string[],
+    photos:string[]
     spa:string[],
-    view:string[]
-    capacity:number,
-    roomTypeId:string
-
+    view:string[],
+    capacity:string[]
 }
 
 export interface Room {
     id:string,
-    status:number,
+    name:string,
+    capacity:string,
     number:number,
-    RoomTypeId:string,
-    type:RoomType
+    pricePerNight:number,
+    type:string,
+    status:number,
+    photo:string
 }
 
 export interface Reservation {
     id:string,
-    checkInDate:Date,
-    checkOutDate:Date,
-    user:User,
-    room:Room,
-    status:Status,
-    TotalPrice:number
+    status:string;
+    photos:string;
+    totalPrice:string;
+    typeName:string;
+    checkInDate:Date;
+    checkOutDate:Date;
+
+}
+
+export interface ReservationAdmin {
+    id:string;
+    number:number;
+    guestName:string;
+    status:string;
+    checkInDate:Date;
+    checkOutDate:Date;
 
 }
 
