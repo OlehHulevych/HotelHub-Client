@@ -17,6 +17,7 @@ export interface User {
     photo:string,
     position?:string,
     email:string,
+    banned:boolean,
 
 }
 
@@ -85,13 +86,18 @@ export const AuthLayout = ({children}:{children:ReactNode}) => {
                 })
                 navigate("/")
             }
-            else{
+            if(response.status==400){
                 const {message} = response.data
                 return message;
             }
         }
-        catch (error){
-            console.error("Error occured: "+error )
+        catch (error:unknown){
+            if(axios.isAxiosError(error) && typeof error.response?.data === "string"){
+                console.error("Error occured: "+error )
+                return error?.response.data
+               
+            }
+            
         }
     }
 

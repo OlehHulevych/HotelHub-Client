@@ -4,9 +4,12 @@ import {useAuth} from "../../context/AuthContext.tsx";
 import ChangePasswordModal from "./ChangePassword.Component.tsx";
 import Cookies from "js-cookie";
 import axios from "axios";
+import {useNavigate} from "react-router";
 
 const UserProfile = () => {
     const {user} = useAuth();
+    const navigate = useNavigate();
+    
     // Initial state based on the image provided
     const [formData, setFormData] = useState({
         fullName: user?.name,
@@ -64,6 +67,12 @@ const UserProfile = () => {
             console.error("Error occurred "+error)
         }
     };
+    
+    const logOutHandler = () => {
+        Cookies.remove("token")
+        navigate("/authorize?type=login")
+        
+    }
 
 
     return (
@@ -103,6 +112,12 @@ const UserProfile = () => {
                         className={styles.changePhotoBtn}
                         >
                         Change Password
+                    </button>
+                    <button
+                        className={styles.changePhotoBtn}
+                        onClick={()=>logOutHandler()}
+                    >
+                        Log Out
                     </button>
                 </div>
 

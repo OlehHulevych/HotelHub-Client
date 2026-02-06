@@ -3,10 +3,12 @@ import styles from './style/staff.module.css';
 import {useAdmin} from "../../context/AdminContext.tsx";
 import SetPositionModal from "./Position.Component.tsx";
 import {useState} from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const StaffList = () => {
     // Mock Data matching the screenshot
-    const {staff, maxPageStaff, pageStaff, setPageStaff} = useAdmin();
+    const {staff, maxPageStaff, pageStaff, setPageStaff, reload,setReload} = useAdmin();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [idForPosition, setIdForPosition] = useState<string>("")
     // Function to determine how to render the "Role" column
@@ -25,6 +27,23 @@ const StaffList = () => {
     const SetPositionHandler = (id:string) => {
         setIdForPosition(id)
         setIsOpen(true)
+    }
+    
+    const banHandler = async (id:string) => {
+        const token = Cookies.get("token")
+        try{
+            const response = await axios.patch(import.meta.env.VITE_API_URL + `/user/ban?id=${id}`,null, {
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            })
+            if(response.status==200){
+                setReload(reload+1)
+            }
+        }
+        catch (error){
+            console.error("Error occured "+error)
+        }
     }
 
     return (
@@ -61,13 +80,13 @@ const StaffList = () => {
                                 </div>
                             </td>
                             <td>
-                                {renderRoleColumn(worker.onDuty)}
+                                {worker.banned? "Banned": renderRoleColumn(worker.onDuty)}
                             </td>
                             <td className={styles.email}>{worker.email}</td>
                             <td>
                                 <div className={styles.actionGroup}>
                                     <button onClick={()=>SetPositionHandler(worker.id)} className={`${styles.btn} ${styles.promoteBtn}`}>Promote</button>
-                                    <button className={`${styles.btn} ${styles.banBtn}`}>Ban</button>
+                                    <button onClick={()=>banHandler(worker.id)} className={`${styles.btn} ${styles.banBtn}`}>{worker.banned? "Unban":"Ban"}</button>
                                 </div>
                             </td>
                         </tr>
