@@ -1,6 +1,6 @@
 ﻿import {useState, useEffect, type Dispatch, type SetStateAction, type ChangeEvent} from 'react';
 import {Calendar, Tv, ShowerHead, Wifi, Utensils, X} from 'lucide-react';
-import styles from './Reservation.module.css';
+import styles from './reservation.module.css';
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router";
 import axios from "axios";
