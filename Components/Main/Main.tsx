@@ -37,7 +37,7 @@ const Main = () => {
                     {/* Right Column: Image */}
                     <div className={styles.imageWrapper}>
                         <img
-                            src="../../public/Main/welcome_hotel_img.png"
+                            src="./Main/welcome_hotel_img.png"
                             alt="Tropical resort wooden house with pool"
                             className={styles.heroImage}
                         />
