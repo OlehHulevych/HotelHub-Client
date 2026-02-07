@@ -1,7 +1,7 @@
 ﻿import {createContext, useState, useContext, useEffect, type ReactNode, type Dispatch, type SetStateAction} from "react"
 import {useNavigate} from "react-router";
 import {useAuth, type User} from "./AuthContext";
-import { type ReservationAdmin, type Room} from "../types";
+import {type ReservationAdmin, type Room, type RoomType} from "../types";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -25,6 +25,7 @@ interface contextProps {
     setReload:Dispatch<SetStateAction<number>>,
     guests:User[]
     staff:User[]
+    roomTypes:RoomType[],
     pageStaff:number,
     setPageStaff:Dispatch<SetStateAction<number>>
     maxPageStaff:number
@@ -51,7 +52,7 @@ export enum AdminTabs {
     Reservations = "reservations",
     Dashboard = "dashboard",
     Rooms = "rooms",
-    Guest = "guests",
+    RoomType = "roomType",
     staff = "staff"
 
 }
@@ -90,6 +91,7 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
     const [roomStatus, setRoomStatus] = useState<number|null>(null)
     const [reservationPage, setReservationPage] = useState<number>(1);
     const [tab,setTab] = useState<string>(AdminTabs.Reservations)
+    const [roomTypes, setRoomTypes] = useState<RoomType[]>([])
     const {roles} = useAuth();
 
     useEffect(() => {
@@ -105,7 +107,7 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
             console.log(isAdmin)
             if(isAdmin && token!==null){
                 try{
-                    const [response,reservationResponse, roomResponse, staffResponse] = await Promise.all([
+                    const [response,reservationResponse, roomResponse, staffResponse, roomTypeResponse] = await Promise.all([
                         axios.get(api_url+"/report",{
                             headers: { Authorization: `Bearer ${token}` },
                             signal: controller.signal
@@ -121,6 +123,12 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                         axios.get(api_url + `/user/All?currentPage=${pageStaff}`,{
                             headers:{Authorization:`Bearer ${token}`},
                             signal:controller.signal
+                        }),
+                        axios.get(api_url + `/RoomType`,{
+                            headers:{
+                                Authorization:`Bearer ${token}`
+                            },
+                            signal:controller.signal
                         })
                     ])
                     if(response.status==200){
@@ -132,9 +140,6 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                         setWorkers(workers)
 
                     }
-                    else{
-                        console.error("Error occurred: "+response)
-                    }
                     if(reservationResponse.status==200){
                         const {items,totalPage,totalLength, activeLength, canceledLength} = reservationResponse.data
                         setLength({
@@ -142,7 +147,6 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                             activeReservationLength: activeLength,
                             canceledReservationLength: canceledLength
                         })
-                        console.log(totalPage)
                         setReservations(items);
                         setReservationMaxPages(totalPage)
 
@@ -167,6 +171,10 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
                         setMaxPageStaff(totalPage)
 
                     }
+                    if(roomTypeResponse.status==200){
+                        const {items} = roomTypeResponse.data;
+                        setRoomTypes(items);
+                    }
                 }
                 catch (error){
                     console.error("Error occurred "+error)
@@ -183,7 +191,7 @@ export const AdminLayout = ({children}:{children:ReactNode}) => {
 
 
     return(
-        <AdminContext.Provider value={{guests, availableRooms, occupiedRooms ,workers,reservations, rooms, tab,setTab,roomPage, setRoomPage, reservationPage, setReservationPage, reservationMaxPages, roomMaxPages, reload, setReload, lengths, setStatus, status, roomLengths,setRoomStatus, roomStatus, staff,maxPageStaff, setPageStaff, pageStaff  }}>
+        <AdminContext.Provider value={{guests, availableRooms, occupiedRooms ,workers,reservations, rooms, tab,setTab,roomPage, setRoomPage, reservationPage, setReservationPage, reservationMaxPages, roomMaxPages, reload, setReload, lengths, setStatus, status, roomLengths,setRoomStatus, roomStatus, staff,maxPageStaff, setPageStaff, pageStaff, roomTypes  }}>
             {children}
         </AdminContext.Provider>
     )

@@ -1,0 +1,255 @@
+﻿/* RoomTypes.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.container {
+    width: 100%;
+    padding: 2rem 3rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: #FDFBF7; /* Warm light background */
+    min-height: 100vh;
+    color: #555;
+}
+
+/* --- Top Header Row --- */
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.pageTitle {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: #444;
+    margin: 0;
+}
+
+.headerActions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.searchWrapper {
+    position: relative;
+    width: 280px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 12px 10px 40px;
+    border: 1px solid #E0E0E0; /* Subtle border */
+    border-radius: 20px; /* Fully rounded search bar */
+    font-size: 0.9rem;
+    outline: none;
+    background-color: #F8F8F8;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.searchInput:focus {
+    background-color: #FFF;
+    border-color: #C1A68D;
+    box-shadow: 0 0 0 2px rgba(193, 166, 141, 0.1);
+}
+
+.createBtn {
+    background-color: #C1A68D; /* Gold/Tan brand color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(193, 166, 141, 0.25);
+    transition: background-color 0.2s;
+}
+
+.createBtn:hover {
+    background-color: #B0957C;
+}
+
+/* --- Main Card --- */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    padding: 1.5rem;
+    border: 1px solid #F2F2F2;
+}
+
+.cardTitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #FAFAFA;
+}
+
+/* --- Table --- */
+.tableContainer {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: 1rem;
+    background-color: #F9F7F5; /* Very subtle header bg */
+    color: #777;
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid #F8F8F8;
+    vertical-align: middle;
+    color: #555;
+}
+
+/* Columns styling */
+.photo {
+    width: 60px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.infoCell {
+    display: flex;
+    flex-direction: column;
+}
+
+.typeName {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #444;
+}
+
+.typeSub {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.basePrice {
+    font-weight: 500;
+    color: #333;
+}
+
+/* Action Buttons */
+.actionGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.actionBtn {
+    border: none;
+    padding: 6px 18px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 70px;
+    transition: opacity 0.2s;
+}
+
+.editBtn {
+    background-color: #90A4AE; /* Muted Slate/Grey-Blue */
+    color: white;
+}
+
+.deleteBtn {
+    background-color: #FADBD8; /* Light Red/Pink */
+    color: #C0392B; /* Dark Red text */
+}
+
+.actionBtn:hover {
+    opacity: 0.9;
+}
+
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2rem;
+}
+
+.pageBtn {
+    border: none;
+    background-color: transparent;
+    color: #888;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.pageBtn:hover {
+    background-color: #F0F0F0;
+}
+
+.activePage {
+    background-color: #C1A68D; /* Gold */
+    color: white;
+}
+
+.activePage:hover {
+    background-color: #B0957C;
+}
+
+.navBtn {
+    width: auto;
+    padding: 0 16px;
+    background-color: #F0F0F0;
+    border-radius: 4px;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .headerRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .headerActions {
+        width: 100%;
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+    .searchWrapper, .createBtn {
+        width: 100%;
+    }
+    .table td, .table th {
+        padding: 0.8rem;
+        white-space: nowrap;
+    }
+}

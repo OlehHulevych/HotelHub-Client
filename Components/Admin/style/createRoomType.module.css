@@ -1,0 +1,330 @@
+﻿/* CreateRoomTypeModal.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers vertically */
+    z-index: 2000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px; /* Slightly wider for the multi-column inputs */
+    max-height: 90vh; /* Prevent overflowing screen height */
+    overflow-y: auto; /* Allow scrolling if content is tall */
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Header --- */
+.header {
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FBFBFB;
+    border-bottom: 1px solid #F0F0F0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #555;
+    margin: 0;
+}
+
+.closeBtn {
+    background-color: #EAEAEA;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #888;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    background-color: #D6D6D6;
+    color: #444;
+}
+
+/* --- Body --- */
+.body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #777;
+}
+
+.input, .textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #EEE;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #333;
+    outline: none;
+    background-color: #FAFAFA;
+    transition: all 0.2s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input:focus, .textarea:focus {
+    border-color: #C1A68D;
+    background-color: #fff;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Price Input Wrapper */
+.priceWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currencySymbol {
+    position: absolute;
+    left: 14px;
+    color: #888;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.priceInput {
+    padding-left: 30px; /* Space for $ */
+}
+
+/* --- Tag Input Styling --- */
+.gridRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for tags */
+    gap: 1.5rem;
+}
+
+.tagContainer {
+    background-color: #FAFAFA;
+    border: 1px solid #EEE;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 48px;
+    transition: border-color 0.2s;
+}
+
+.tagContainer:focus-within {
+    border-color: #C1A68D;
+    background-color: #fff;
+}
+
+.tag {
+    background-color: #EFE5D9; /* Beige/Tan chip color */
+    color: #6D5D50;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.removeTagBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #8C7B70;
+    font-size: 1rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.removeTagBtn:hover {
+    color: #000;
+}
+
+.tagInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    min-width: 80px;
+    padding: 4px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.helperText {
+    font-size: 0.75rem;
+    color: #AAA;
+    margin-top: 4px;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    border-top: 1px solid #F0F0F0;
+    background-color: #FBFBFB;
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.cancelBtn {
+    background-color: #EEE;
+    color: #666;
+}
+
+.cancelBtn:hover {
+    background-color: #E0E0E0;
+}
+
+.createBtn {
+    background-color: #C1A68D; /* Gold/Tan brand color */
+    color: white;
+}
+
+.createBtn:hover {
+    background-color: #B0957C;
+    transform: translateY(-1px);
+}
+.uploadBox {
+    border: 2px dashed #E0E0E0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    background-color: #FAFAFA;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.uploadBox:hover {
+    border-color: #C1A68D; /* Brand color */
+    background-color: #FFF;
+}
+
+.uploadIcon {
+    color: #999;
+}
+
+.uploadText {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.uploadSubText {
+    font-size: 0.75rem;
+    color: #AAA;
+}
+
+.hiddenInput {
+    display: none;
+}
+
+/* --- Image Previews --- */
+.previewGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.previewWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #EEE;
+}
+
+.removeImgBtn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #FFF;
+    border: 1px solid #EEE;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #FF5252;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 12px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 600px) {
+    .gridRow { grid-template-columns: 1fr; }
+}

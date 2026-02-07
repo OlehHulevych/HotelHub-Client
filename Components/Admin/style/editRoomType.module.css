@@ -1,0 +1,318 @@
+﻿/* EditRoomTypeModal.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    font-family: 'Poppins', sans-serif;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Header --- */
+.header {
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FBFBFB;
+    border-bottom: 1px solid #F0F0F0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #444;
+    margin: 0;
+}
+
+.closeBtn {
+    background-color: #EAEAEA;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #888;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    background-color: #D6D6D6;
+    color: #444;
+}
+
+/* --- Body --- */
+.body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #777;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #EEE;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #333;
+    outline: none;
+    background-color: #FAFAFA;
+    transition: all 0.2s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input:focus {
+    border-color: #C1A68D;
+    background-color: #fff;
+}
+
+/* --- Photo Upload Section --- */
+.uploadBox {
+    border: 2px dashed #DCCFC6; /* Dashed border color from image */
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    background-color: #FAF8F6; /* Light beige tint background */
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.uploadBox:hover {
+    border-color: #C1A68D;
+    background-color: #FFF;
+}
+
+.uploadIcon {
+    color: #999;
+}
+
+.uploadText {
+    font-size: 0.95rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.uploadSubText {
+    font-size: 0.8rem;
+    color: #AAA;
+}
+
+.hiddenInput {
+    display: none;
+}
+
+/* Image Previews */
+.previewGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.previewWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #EEE;
+}
+
+.existingLabel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 0.65rem;
+    text-align: center;
+    padding: 2px 0;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.removeImgBtn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #FFF;
+    border: 1px solid #EEE;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #FF5252;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+
+/* --- Tag Inputs Grid --- */
+.gridRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.tagContainer {
+    background-color: #FAFAFA;
+    border: 1px solid #EEE;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 48px;
+    transition: border-color 0.2s;
+}
+
+.tagContainer:focus-within {
+    border-color: #C1A68D;
+    background-color: #fff;
+}
+
+.tag {
+    background-color: #EEE6DD; /* Chip color matching image */
+    color: #6D5D50;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.removeTagBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #8C7B70;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.tagInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    min-width: 100px;
+    padding: 4px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.tagInput::placeholder {
+    color: #BBB;
+    font-size: 0.85rem;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    border-top: 1px solid #F0F0F0;
+    background-color: #FBFBFB;
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.cancelBtn {
+    background-color: #EEE;
+    color: #666;
+    border: 1px solid #EAEAEA;
+}
+
+.cancelBtn:hover {
+    background-color: #E0E0E0;
+}
+
+.saveBtn {
+    background-color: #AD9376; /* Darker Gold/Brown from image */
+    color: white;
+}
+
+.saveBtn:hover {
+    background-color: #967D62;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 600px) {
+    .gridRow { grid-template-columns: 1fr; }
+}
